@@ -2,6 +2,7 @@
 import { business } from "@/data/business";
 import { hourGroups } from "@/data/hours";
 import { navigationItems } from "@/data/navigation";
+import { getAllowedHref } from "@/utils/linkPolicy";
 
 interface Props {
   pathname: string;
@@ -39,7 +40,7 @@ const { pathname } = Astro.props;
         {navigationItems.map((item) => (
           <li>
             <a
-              href={item.href}
+              href={getAllowedHref(item.href)}
               aria-current={pathname === item.href ? "page" : undefined}
               data-mobile-nav-link
             >
@@ -65,11 +66,13 @@ const { pathname } = Astro.props;
 
       <div class="mobile-nav__group">
         <p class="eyebrow">Kontakt</p>
-        <a href={business.phoneHref}>{business.phoneDisplay}</a>
+        <a href={getAllowedHref(business.phoneHref)}>{business.phoneDisplay}</a>
         <p>{business.addressDisplay}</p>
       </div>
 
-      <a class="button-link" href={business.phoneHref}>Pozovi teretanu</a>
+      <a class="button-link" href={getAllowedHref(business.phoneHref)}>
+        Pozovi teretanu
+      </a>
     </div>
   </aside>
 </div>
@@ -142,6 +145,11 @@ const { pathname } = Astro.props;
     gap: 1.5rem;
     max-height: calc(100vh - var(--header-height) - 1.5rem);
     overflow: auto;
+  }
+
+  .mobile-nav__backdrop[hidden],
+  .mobile-nav__panel[hidden] {
+    display: none !important;
   }
 
   .mobile-nav__menu ul,

@@ -71,6 +71,17 @@ const initializeMobileNavigation = () => {
     document.body.classList.remove("is-locked");
   };
 
+  const resetMenuState = () => {
+    isOpen = false;
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Otvori navigaciju");
+    toggle.removeAttribute("data-open");
+    root.removeAttribute("data-open");
+    panel.hidden = true;
+    backdrop.hidden = true;
+    unlockScroll();
+  };
+
   const setMenuState = (nextOpen) => {
     isOpen = nextOpen;
     toggle.setAttribute("aria-expanded", String(nextOpen));
@@ -112,6 +123,8 @@ const initializeMobileNavigation = () => {
 
     openMenu();
   });
+
+  resetMenuState();
 
   backdrop.addEventListener("click", closeMenu);
 

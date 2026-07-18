@@ -4,6 +4,7 @@ import logo from "@/assets/logo/logo.jpg";
 import MobileNavigation from "@/components/layout/MobileNavigation.astro";
 import { business } from "@/data/business";
 import { navigationItems } from "@/data/navigation";
+import { getAllowedHref } from "@/utils/linkPolicy";
 
 interface Props {
   pathname: string;
@@ -31,7 +32,10 @@ const { pathname } = Astro.props;
       <ul role="list">
         {navigationItems.map((item) => (
           <li>
-            <a href={item.href} aria-current={pathname === item.href ? "page" : undefined}>
+            <a
+              href={getAllowedHref(item.href)}
+              aria-current={pathname === item.href ? "page" : undefined}
+            >
               {item.label}
             </a>
           </li>
@@ -40,7 +44,7 @@ const { pathname } = Astro.props;
     </nav>
 
     <div class="site-header__actions">
-      <a class="site-header__call" href={business.phoneHref}>
+      <a class="site-header__call" href={getAllowedHref(business.phoneHref)}>
         Pozovi
       </a>
       <MobileNavigation pathname={pathname} />

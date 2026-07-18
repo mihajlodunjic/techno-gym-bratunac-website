@@ -1,5 +1,6 @@
 ---
 import type { BreadcrumbItem } from "@/types/business";
+import { getAllowedHref } from "@/utils/linkPolicy";
 
 interface Props {
   items: BreadcrumbItem[];
@@ -18,7 +19,7 @@ const { items } = Astro.props;
           {isLast ? (
             <span aria-current="page">{item.label}</span>
           ) : (
-            <a href={item.href}>{item.label}</a>
+            <a href={getAllowedHref(item.href)}>{item.label}</a>
           )}
         </li>
       );

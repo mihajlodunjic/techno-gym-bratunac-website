@@ -1,4 +1,6 @@
 ---
+import { getAllowedHref, shouldUseExternalTarget } from "@/utils/linkPolicy";
+
 interface Props {
   href: string;
   label: string;
@@ -14,14 +16,17 @@ const {
   external = false,
   ariaLabel
 } = Astro.props;
+
+const allowedHref = getAllowedHref(href);
+const useExternalTarget = shouldUseExternalTarget(href, external);
 ---
 
 <a
   class:list={[variant === "primary" ? "button-link" : "inline-link"]}
-  href={href}
+  href={allowedHref}
   aria-label={ariaLabel}
-  target={external ? "_blank" : undefined}
-  rel={external ? "noreferrer" : undefined}
+  target={useExternalTarget ? "_blank" : undefined}
+  rel={useExternalTarget ? "noreferrer" : undefined}
 >
   <span>{label}</span>
   <svg

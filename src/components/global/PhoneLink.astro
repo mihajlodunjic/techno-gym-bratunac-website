@@ -1,4 +1,6 @@
 ---
+import { getAllowedHref } from "@/utils/linkPolicy";
+
 interface Props {
   href: string;
   label: string;
@@ -6,9 +8,10 @@ interface Props {
 }
 
 const { href, label, className = "" } = Astro.props;
+const allowedHref = getAllowedHref(href);
 ---
 
-<a class:list={["phone-link", className]} href={href}>
+<a class:list={["phone-link", className]} href={allowedHref}>
   <span class="phone-link__eyebrow eyebrow">Pozovi teretanu</span>
   <span class="phone-link__number">{label}</span>
 </a>
