@@ -91,6 +91,15 @@ const { pathname } = Astro.props;
     align-items: center;
     flex-direction: column;
     gap: 0.32rem;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+
+  .mobile-nav[data-open="true"] .mobile-nav__toggle {
+    position: fixed;
+    inset-block-start: calc(env(safe-area-inset-top, 0px) + 0.75rem);
+    inset-inline-end: calc(env(safe-area-inset-right, 0px) + 1rem);
+    z-index: 70;
   }
 
   .mobile-nav__toggle span {

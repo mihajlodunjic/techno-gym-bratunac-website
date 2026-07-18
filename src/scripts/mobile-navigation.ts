@@ -30,6 +30,14 @@ const trapFocus = (event, root) => {
   }
 };
 
+const focusWithoutScroll = (element) => {
+  try {
+    element.focus({ preventScroll: true });
+  } catch {
+    element.focus();
+  }
+};
+
 const initializeMobileNavigation = () => {
   const root = document.querySelector("[data-mobile-nav]");
 
@@ -63,42 +71,46 @@ const initializeMobileNavigation = () => {
     document.body.classList.remove("is-locked");
   };
 
-  const closeMenu = () => {
-    if (!isOpen) {
+  const setMenuState = (nextOpen) => {
+    isOpen = nextOpen;
+    toggle.setAttribute("aria-expanded", String(nextOpen));
+    toggle.setAttribute(
+      "aria-label",
+      nextOpen ? "Zatvori navigaciju" : "Otvori navigaciju"
+    );
+    panel.hidden = !nextOpen;
+    backdrop.hidden = !nextOpen;
+
+    if (nextOpen) {
+      toggle.dataset.open = "true";
+      root.dataset.open = "true";
+      lockScroll();
+
+      const firstLink = panel.querySelector("a[href]");
+      if (firstLink instanceof HTMLElement) {
+        focusWithoutScroll(firstLink);
+      }
+    } else {
+      toggle.removeAttribute("data-open");
+      root.removeAttribute("data-open");
+      unlockScroll();
+      focusWithoutScroll(toggle);
+    }
+  };
+
+  const closeMenu = () => setMenuState(false);
+  const openMenu = () => setMenuState(true);
+
+  toggle.addEventListener("click", () => {
+    const isCurrentlyOpen =
+      toggle.getAttribute("aria-expanded") === "true" || !panel.hidden;
+
+    if (isCurrentlyOpen) {
+      closeMenu();
       return;
     }
 
-    isOpen = false;
-    toggle.setAttribute("aria-expanded", "false");
-    toggle.setAttribute("aria-label", "Otvori navigaciju");
-    toggle.dataset.open = "false";
-    panel.hidden = true;
-    backdrop.hidden = true;
-    unlockScroll();
-    toggle.focus();
-  };
-
-  const openMenu = () => {
-    isOpen = true;
-    toggle.setAttribute("aria-expanded", "true");
-    toggle.setAttribute("aria-label", "Zatvori navigaciju");
-    toggle.dataset.open = "true";
-    panel.hidden = false;
-    backdrop.hidden = false;
-    lockScroll();
-
-    const firstLink = panel.querySelector("a[href]");
-    if (firstLink instanceof HTMLElement) {
-      firstLink.focus();
-    }
-  };
-
-  toggle.addEventListener("click", () => {
-    if (isOpen) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
+    openMenu();
   });
 
   backdrop.addEventListener("click", closeMenu);
