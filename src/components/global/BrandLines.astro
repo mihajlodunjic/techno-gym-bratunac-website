@@ -1,0 +1,56 @@
+---
+interface Props {
+  tone?: "light" | "dark";
+  className?: string;
+}
+
+const { tone = "dark", className = "" } = Astro.props;
+---
+
+<div class:list={["brand-lines", `brand-lines--${tone}`, className]} aria-hidden="true">
+  <span></span>
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<style>
+  .brand-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .brand-lines span {
+    position: absolute;
+    opacity: 0.55;
+  }
+
+  .brand-lines--dark span {
+    background: rgba(23, 23, 20, 0.28);
+  }
+
+  .brand-lines--light span {
+    background: rgba(244, 240, 231, 0.22);
+  }
+
+  .brand-lines span:nth-child(1) {
+    inset: 1rem auto 1rem 17%;
+    inline-size: 1px;
+  }
+
+  .brand-lines span:nth-child(2) {
+    inset: 18% 1rem auto 1rem;
+    block-size: 1px;
+  }
+
+  .brand-lines span:nth-child(3) {
+    inset: auto 1rem 24% 1rem;
+    block-size: 1px;
+  }
+
+  .brand-lines span:nth-child(4) {
+    inset: 1rem 19% 1rem auto;
+    inline-size: 1px;
+  }
+</style>

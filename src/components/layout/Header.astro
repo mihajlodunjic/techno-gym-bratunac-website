@@ -1,0 +1,155 @@
+---
+import { Image } from "astro:assets";
+import logo from "@/assets/logo/logo.jpg";
+import MobileNavigation from "@/components/layout/MobileNavigation.astro";
+import { business } from "@/data/business";
+import { navigationItems } from "@/data/navigation";
+
+interface Props {
+  pathname: string;
+}
+
+const { pathname } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="site-container site-header__bar">
+    <a class="site-header__brand" href="/" aria-label={`${business.name} početna`}>
+      <Image
+        src={logo}
+        alt="Techno Gym logotip"
+        width={150}
+        height={150}
+        densities={[1]}
+        format="webp"
+        loading="eager"
+      />
+      <span class="site-header__locality">{business.localityLabel}</span>
+    </a>
+
+    <nav class="site-header__nav" aria-label="Glavna navigacija">
+      <ul role="list">
+        {navigationItems.map((item) => (
+          <li>
+            <a href={item.href} aria-current={pathname === item.href ? "page" : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <a class="site-header__call" href={business.phoneHref}>
+        Pozovi
+      </a>
+      <MobileNavigation pathname={pathname} />
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(244, 240, 231, 0.98);
+    border-bottom: var(--border-thin);
+  }
+
+  .site-header__bar {
+    min-height: var(--header-height);
+    display: grid;
+    grid-template-columns: minmax(0, auto) 1fr auto;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .site-header__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.85rem;
+    min-width: 0;
+    text-decoration: none;
+  }
+
+  .site-header__brand :global(img) {
+    inline-size: clamp(3.1rem, 5vw, 4.4rem);
+    block-size: auto;
+    aspect-ratio: 1;
+    object-fit: contain;
+    flex: none;
+  }
+
+  .site-header__locality {
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .site-header__nav ul {
+    display: flex;
+    justify-content: center;
+    gap: clamp(1rem, 2vw, 1.8rem);
+    list-style: none;
+  }
+
+  .site-header__nav a {
+    min-height: 2.75rem;
+    display: inline-flex;
+    align-items: center;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+
+  .site-header__nav a[aria-current="page"] {
+    border-bottom-color: var(--color-amber);
+  }
+
+  .site-header__actions {
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .site-header__call {
+    min-height: 2.85rem;
+    padding: 0.7rem 1rem;
+    display: inline-flex;
+    align-items: center;
+    background: var(--color-ink);
+    color: var(--color-paper-strong);
+    text-decoration: none;
+  }
+
+  @media (max-width: 63.9375rem) {
+    .site-header__bar {
+      grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .site-header__nav,
+    .site-header__call {
+      display: none;
+    }
+
+    .site-header__locality {
+      font-size: 0.8rem;
+      white-space: normal;
+    }
+  }
+
+  @media (max-width: 26rem) {
+    .site-header__brand {
+      gap: 0.65rem;
+    }
+
+    .site-header__locality {
+      max-width: 7rem;
+    }
+  }
+</style>

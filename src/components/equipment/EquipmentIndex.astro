@@ -1,0 +1,60 @@
+---
+import ActionLink from "@/components/global/ActionLink.astro";
+import SectionIndex from "@/components/global/SectionIndex.astro";
+import EquipmentSpec from "@/components/equipment/EquipmentSpec.astro";
+import { equipment } from "@/data/equipment";
+---
+
+<section class="equipment-index section" id="oprema">
+  <div class="site-container equipment-index__grid">
+    <div class="equipment-index__intro">
+      <SectionIndex number="01" label="OPREMA" />
+      <div class="accent-rule"></div>
+      <h2 class="section-title">Selection linija i cardio zona</h2>
+      <p class="section-lead">
+        Originalna Technogym oprema nije sporedna napomena. Ovdje je to osnovna
+        činjenica: Selection sprave za različite mišićne grupe i cardio zona sa
+        četiri originalne trake za trčanje.
+      </p>
+      <ActionLink
+        href="/oprema-i-prostor/"
+        label="Pogledaj opremu i prostor"
+      />
+    </div>
+
+    <div class="equipment-index__list">
+      {equipment.map((item) => (
+        <EquipmentSpec item={item} />
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .equipment-index {
+    border-top: var(--border-thin);
+  }
+
+  .equipment-index__grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .equipment-index__intro {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+  }
+
+  .equipment-index__list {
+    display: grid;
+    gap: 1rem;
+  }
+
+  @media (min-width: 64rem) {
+    .equipment-index__grid {
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.35fr);
+      align-items: start;
+    }
+  }
+</style>

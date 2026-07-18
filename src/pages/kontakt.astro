@@ -1,0 +1,86 @@
+---
+import ActionLink from "@/components/global/ActionLink.astro";
+import LocationPanel from "@/components/location/LocationPanel.astro";
+import { business } from "@/data/business";
+import { pageMeta } from "@/data/site";
+import PageLayout from "@/layouts/PageLayout.astro";
+---
+
+<PageLayout
+  title={pageMeta.contact.title}
+  description={pageMeta.contact.description}
+  pathname="/kontakt/"
+  h1="Kontakt i lokacija"
+  intro="Telefon, adresa, radno vrijeme i Instagram profil su potvrđeni kontakt kanali za Techno Gym Bratunac."
+  eyebrow="KONTAKT / TRG MILOŠA OBILIĆA"
+>
+  <Fragment slot="actions">
+    <ActionLink href={business.phoneHref} label="Pozovi +387 65 270 814" variant="primary" />
+    <ActionLink href={business.instagramUrl} label="Otvori Instagram" external />
+  </Fragment>
+
+  <section class="section">
+    <div class="site-container">
+      <LocationPanel
+        heading="Trg Miloša Obilića, Bratunac"
+        intro="Za najdirektniju provjeru cijena, rasporeda ili dolaska koristi poziv, mapu po adresi ili Instagram profil."
+        eyebrow="Telefon, adresa i raspored"
+      />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="site-container contact-page__grid">
+      <article class="contact-page__panel panel">
+        <p class="eyebrow">Mapa</p>
+        <h2>Otvaranje mape bez iframe-a</h2>
+        <p>
+          Link za mape koristi samo potvrđenu tekstualnu adresu. Nisu dodate
+          koordinate, parking ni opis ulaza koji dokumentacija ne potvrđuje.
+        </p>
+        <ActionLink href={business.mapQueryUrl} label="Otvori u mapama" external />
+      </article>
+
+      <article class="contact-page__panel panel panel--ink">
+        <p class="eyebrow">Instagram</p>
+        <h2>Prati objave i obavještenja</h2>
+        <p>
+          Instagram ostaje važan kanal za kratke vizuelne objave i praktična
+          obavještenja. Stare promotivne poruke nisu prenesene kao trajne
+          činjenice na sajtu.
+        </p>
+        <ActionLink href={business.instagramUrl} label="Otvori Instagram" external />
+      </article>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .contact-page__grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .contact-page__panel {
+    padding: 1.25rem;
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .contact-page__panel h2 {
+    font-size: clamp(2.1rem, 6vw, 3.7rem);
+    line-height: 0.94;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+  }
+
+  .contact-page__panel :global(.inline-link) {
+    color: inherit;
+  }
+
+  @media (min-width: 48rem) {
+    .contact-page__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+</style>

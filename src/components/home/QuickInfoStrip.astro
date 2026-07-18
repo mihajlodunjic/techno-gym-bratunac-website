@@ -1,0 +1,67 @@
+---
+import { business } from "@/data/business";
+import { hourGroups } from "@/data/hours";
+---
+
+<section class="quick-strip" aria-label="Brze informacije">
+  <div class="site-container quick-strip__grid">
+    <div>
+      <span class="eyebrow">PON–PET</span>
+      <strong>{hourGroups[0].timeLabel}</strong>
+    </div>
+    <div>
+      <span class="eyebrow">SUB–NED</span>
+      <strong>{hourGroups[1].timeLabel}</strong>
+    </div>
+    <div>
+      <span class="eyebrow">Adresa</span>
+      <strong>{business.streetAddress}</strong>
+    </div>
+    <div>
+      <span class="eyebrow">Telefon</span>
+      <strong>{business.phoneDisplay}</strong>
+    </div>
+  </div>
+</section>
+
+<style>
+  .quick-strip {
+    border-top: var(--border-thin);
+    border-bottom: var(--border-thin);
+    background: var(--color-paper-strong);
+  }
+
+  .quick-strip__grid {
+    display: grid;
+    gap: 0;
+  }
+
+  .quick-strip__grid > div {
+    display: grid;
+    gap: 0.45rem;
+    padding: 1rem;
+    border-bottom: var(--border-thin);
+  }
+
+  .quick-strip__grid > div strong {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 3vw, 1.6rem);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+  }
+
+  @media (min-width: 48rem) {
+    .quick-strip__grid {
+      grid-template-columns: 1fr 1fr 1.25fr 1.2fr;
+    }
+
+    .quick-strip__grid > div {
+      border-bottom: 0;
+      border-right: var(--border-thin);
+    }
+
+    .quick-strip__grid > div:last-child {
+      border-right: 0;
+    }
+  }
+</style>

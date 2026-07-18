@@ -1,0 +1,125 @@
+---
+import type { EquipmentRecord } from "@/types/business";
+
+interface Props {
+  item: EquipmentRecord;
+}
+
+const { item } = Astro.props;
+---
+
+<article class="equipment-spec panel">
+  <div class="equipment-spec__header">
+    <p class="eyebrow">{item.code}</p>
+    <p class="equipment-spec__maker">{item.manufacturer}</p>
+  </div>
+
+  <div class="equipment-spec__body">
+    <div>
+      <h3>{item.title}</h3>
+      <p>{item.description}</p>
+    </div>
+
+    {item.quantityLabel && (
+      <div class="equipment-spec__quantity">
+        <strong>{String(item.quantity).padStart(2, "0")}</strong>
+        <span>{item.quantityLabel}</span>
+      </div>
+    )}
+  </div>
+
+  <dl class="equipment-spec__details">
+    <div>
+      <dt>Linija</dt>
+      <dd>{item.line}</dd>
+    </div>
+    <div>
+      <dt>Status</dt>
+      <dd>Potvrđeno dostavljenim informacijama</dd>
+    </div>
+  </dl>
+</article>
+
+<style>
+  .equipment-spec {
+    padding: 1.25rem;
+    display: grid;
+    gap: 1.2rem;
+    overflow: clip;
+  }
+
+  .equipment-spec__header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: baseline;
+    border-bottom: var(--border-thin);
+    padding-bottom: 0.9rem;
+  }
+
+  .equipment-spec__maker {
+    color: var(--color-text-muted);
+  }
+
+  .equipment-spec__body {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .equipment-spec h3 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .equipment-spec__quantity {
+    display: grid;
+    gap: 0.4rem;
+    align-content: start;
+    justify-items: start;
+    border-left: 1px solid var(--color-border);
+    padding-left: 1rem;
+  }
+
+  .equipment-spec__quantity strong {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 10vw, 5rem);
+    line-height: 0.82;
+    letter-spacing: -0.04em;
+  }
+
+  .equipment-spec__quantity span {
+    max-width: 12rem;
+    font-weight: 600;
+  }
+
+  .equipment-spec__details {
+    display: grid;
+    gap: 0.75rem;
+    padding-top: 0.5rem;
+    border-top: var(--border-thin);
+  }
+
+  .equipment-spec__details div {
+    display: grid;
+    gap: 0.25rem;
+  }
+
+  .equipment-spec__details dt {
+    font-family: var(--font-display);
+    font-size: var(--label-size);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+  }
+
+  @media (min-width: 40rem) {
+    .equipment-spec__body {
+      grid-template-columns: minmax(0, 1.2fr) minmax(10rem, 0.8fr);
+      align-items: start;
+    }
+  }
+</style>

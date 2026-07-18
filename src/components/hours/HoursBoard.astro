@@ -1,0 +1,96 @@
+---
+import { hourGroups, hours } from "@/data/hours";
+---
+
+<div class="hours-board">
+  <div class="hours-board__desktop" aria-label="Sedmični pregled radnog vremena">
+    {hours.map((entry) => (
+      <article class="hours-board__day" data-day-index={entry.index}>
+        <p class="eyebrow">{entry.shortLabel}</p>
+        <strong>
+          {entry.opensAt}
+          <span>–</span>
+          {entry.closesAt}
+        </strong>
+      </article>
+    ))}
+  </div>
+
+  <div class="hours-board__mobile" aria-label="Grupe radnog vremena">
+    {hourGroups.map((group) => (
+      <article class="hours-board__group" data-day-group={group.key}>
+        <p class="eyebrow">{group.daysLabel}</p>
+        <strong>{group.timeLabel}</strong>
+      </article>
+    ))}
+  </div>
+</div>
+
+<style>
+  .hours-board__desktop,
+  .hours-board__mobile {
+    display: grid;
+    gap: 0;
+    border: var(--border-thin);
+    background: var(--color-paper-strong);
+  }
+
+  .hours-board__day,
+  .hours-board__group {
+    padding: 1rem;
+    display: grid;
+    gap: 0.45rem;
+    border-bottom: var(--border-thin);
+    transition: background-color var(--transition-fast);
+  }
+
+  .hours-board__day:last-child,
+  .hours-board__group:last-child {
+    border-bottom: 0;
+  }
+
+  .hours-board strong {
+    font-family: var(--font-display);
+    font-size: clamp(1.55rem, 4vw, 2.4rem);
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+  }
+
+  .hours-board [data-today="true"] {
+    background: linear-gradient(
+      90deg,
+      rgba(242, 181, 72, 0.26) 0%,
+      rgba(242, 181, 72, 0.08) 100%
+    );
+  }
+
+  .hours-board__mobile {
+    display: grid;
+  }
+
+  .hours-board__desktop {
+    display: none;
+  }
+
+  @media (min-width: 64rem) {
+    .hours-board__desktop {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+    }
+
+    .hours-board__day {
+      min-height: 10rem;
+      align-content: end;
+      border-bottom: 0;
+      border-right: var(--border-thin);
+    }
+
+    .hours-board__day:last-child {
+      border-right: 0;
+    }
+
+    .hours-board__mobile {
+      display: none;
+    }
+  }
+</style>

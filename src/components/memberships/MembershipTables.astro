@@ -1,0 +1,87 @@
+---
+import { formatPrice, memberships } from "@/data/memberships";
+
+const womenMemberships = memberships.filter((item) => item.category === "women");
+const menMemberships = memberships.filter((item) => item.category === "men");
+---
+
+<div class="membership-tables">
+  <div class="table-shell membership-tables__table">
+    <table>
+      <caption class="eyebrow">Žene</caption>
+      <thead>
+        <tr>
+          <th scope="col">Paket</th>
+          <th scope="col">Cijena</th>
+        </tr>
+      </thead>
+      <tbody>
+        {womenMemberships.map((item) => (
+          <tr>
+            <th scope="row">{item.label}</th>
+            <td>{formatPrice(item.amount)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="table-shell membership-tables__table">
+    <table>
+      <caption class="eyebrow">Muškarci</caption>
+      <thead>
+        <tr>
+          <th scope="col">Paket</th>
+          <th scope="col">Cijena</th>
+        </tr>
+      </thead>
+      <tbody>
+        {menMemberships.map((item) => (
+          <tr>
+            <th scope="row">{item.label}</th>
+            <td>{formatPrice(item.amount)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<style>
+  .membership-tables {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .membership-tables__table {
+    padding: 1.1rem 1.25rem 1.25rem;
+  }
+
+  .membership-tables__table caption {
+    margin-bottom: 0.75rem;
+  }
+
+  .membership-tables__table th[scope="row"] {
+    font-weight: 600;
+  }
+
+  .membership-tables__table td {
+    font-family: var(--font-display);
+    font-size: clamp(1.9rem, 5vw, 2.8rem);
+    font-weight: 700;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+  }
+
+  @media (min-width: 64rem) {
+    .membership-tables {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 28rem) {
+    .membership-tables__table td {
+      font-size: 1.65rem;
+    }
+  }
+</style>

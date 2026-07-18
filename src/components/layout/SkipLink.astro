@@ -1,0 +1,19 @@
+<a class="skip-link" href="#main-content">Preskoči na sadržaj</a>
+
+<style>
+  .skip-link {
+    position: absolute;
+    inset: 0 auto auto 0;
+    z-index: 1000;
+    padding: 0.85rem 1rem;
+    background: var(--color-ink);
+    color: var(--color-paper-strong);
+    text-decoration: none;
+    transform: translateY(-140%);
+    transition: transform var(--transition-fast);
+  }
+
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+</style>

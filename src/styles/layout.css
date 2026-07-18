@@ -1,0 +1,29 @@
+.site-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.site-container {
+  width: min(var(--max-width), calc(100% - (var(--page-padding) * 2)));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: clamp(4rem, 7vw, 8rem);
+}
+
+.section-tight {
+  padding-block: clamp(3rem, 6vw, 5rem);
+}
+
+.content-grid {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+
+@media (min-width: 48rem) {
+  .content-grid--two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

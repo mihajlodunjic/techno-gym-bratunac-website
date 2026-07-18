@@ -1,0 +1,56 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  className?: string;
+}
+
+const { href, label, className = "" } = Astro.props;
+---
+
+<a class:list={["phone-link", className]} href={href}>
+  <span class="phone-link__eyebrow eyebrow">Pozovi teretanu</span>
+  <span class="phone-link__number">{label}</span>
+</a>
+
+<style>
+  .phone-link {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-height: 3rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--color-ink);
+    background: var(--color-paper-strong);
+    text-decoration: none;
+    transition:
+      transform var(--transition-fast),
+      border-color var(--transition-fast);
+  }
+
+  .phone-link:hover {
+    transform: translateY(-1px);
+    border-color: var(--color-amber);
+  }
+
+  .phone-link__eyebrow {
+    color: var(--color-text-muted);
+  }
+
+  .phone-link__number {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 5vw, 3.4rem);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 30rem) {
+    .phone-link__number {
+      font-size: clamp(1.6rem, 9vw, 2.2rem);
+      white-space: normal;
+      overflow-wrap: anywhere;
+    }
+  }
+</style>

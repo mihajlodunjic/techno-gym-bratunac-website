@@ -1,0 +1,66 @@
+---
+import { business } from "@/data/business";
+import { openingHoursSpecification } from "@/data/hours";
+import { toAbsoluteUrl } from "@/data/site";
+import type { BreadcrumbItem } from "@/types/business";
+
+interface Props {
+  pathname: string;
+  breadcrumbs?: BreadcrumbItem[];
+}
+
+const { pathname, breadcrumbs = [] } = Astro.props;
+
+const pageUrl = toAbsoluteUrl(pathname);
+const logoUrl = toAbsoluteUrl("/logo.jpg");
+
+const exerciseGym = pageUrl
+  ? {
+      "@context": "https://schema.org",
+      "@type": "ExerciseGym",
+      "@id": `${pageUrl}#exercise-gym`,
+      name: business.name,
+      url: pageUrl,
+      telephone: business.phoneDisplay,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: business.streetAddress,
+        postalCode: business.postalCode,
+        addressLocality: business.locality,
+        addressCountry: business.countryCode
+      },
+      openingHoursSpecification,
+      sameAs: [business.instagramUrl],
+      ...(logoUrl ? { logo: logoUrl } : {})
+    }
+  : undefined;
+
+const breadcrumbStructuredData =
+  pageUrl && breadcrumbs.length > 0
+    ? {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: breadcrumbs.map((item, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: item.label,
+          item: toAbsoluteUrl(item.href)
+        }))
+      }
+    : undefined;
+---
+
+{exerciseGym && (
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(exerciseGym)}
+  ></script>
+)}
+{breadcrumbStructuredData && (
+  <script
+    is:inline
+    type="application/ld+json"
+    set:html={JSON.stringify(breadcrumbStructuredData)}
+  ></script>
+)}

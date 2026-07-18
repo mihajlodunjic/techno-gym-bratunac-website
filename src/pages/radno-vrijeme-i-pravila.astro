@@ -1,0 +1,112 @@
+---
+import ActionLink from "@/components/global/ActionLink.astro";
+import SectionIndex from "@/components/global/SectionIndex.astro";
+import HoursBoard from "@/components/hours/HoursBoard.astro";
+import LocationPanel from "@/components/location/LocationPanel.astro";
+import HygieneNotice from "@/components/rules/HygieneNotice.astro";
+import { pageMeta } from "@/data/site";
+import PageLayout from "@/layouts/PageLayout.astro";
+---
+
+<PageLayout
+  title={pageMeta.hours.title}
+  description={pageMeta.hours.description}
+  pathname="/radno-vrijeme-i-pravila/"
+  h1="Radno vrijeme i pravila"
+  intro="Sve praktične informacije prije dolaska stoje na jednom mjestu: sedmični raspored, obavezna čista obuća i kontakt za brzu provjeru."
+  eyebrow="RASPored / HIGIJENA"
+>
+  <Fragment slot="actions">
+    <ActionLink href="/kontakt/" label="Pronađi nas" variant="primary" />
+    <ActionLink href="/clanarine/" label="Pogledaj članarine" />
+  </Fragment>
+
+  <section class="section">
+    <div class="site-container hours-page__grid">
+      <div class="hours-page__intro">
+        <SectionIndex number="01" label="SEDMICA" />
+        <h2 class="section-title">Pregled radnog vremena</h2>
+        <p class="section-lead">
+          Radnim danima do 22:00, vikendom do 20:00. Pregled je u HTML-u i bez
+          JavaScripta, a skript samo diskretno označava trenutni dan.
+        </p>
+      </div>
+
+      <div class="hours-page__content">
+        <HoursBoard />
+      </div>
+    </div>
+  </section>
+
+  <HygieneNotice showAction={false} />
+
+  <section class="section">
+    <div class="site-container hours-page__grid">
+      <div class="hours-page__intro">
+        <SectionIndex number="03" label="PRIJE DOLASKA" />
+        <h2 class="section-title">Tri stvari koje vrijedi provjeriti</h2>
+      </div>
+
+      <div class="hours-page__content">
+        <div class="hours-page__checklist panel">
+          <ul role="list">
+            <li>Provjeri raspored radnih dana i vikenda prije polaska.</li>
+            <li>Ponesi čiste patike i čistu sportsku opremu za trening.</li>
+            <li>Ako želiš potvrdu aktuelnih detalja, nazovi teretanu.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="site-container">
+      <LocationPanel
+        heading="Lokacija i direktan kontakt"
+        intro="Mapa se vodi preko pune tekstualne adrese, bez izmišljenih koordinata i bez teškog iframe ugrađivanja."
+        eyebrow="Lokacija"
+      />
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .hours-page__grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .hours-page__intro,
+  .hours-page__content {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .hours-page__checklist {
+    padding: 1.25rem;
+  }
+
+  .hours-page__checklist ul {
+    list-style: none;
+    display: grid;
+    gap: 0.9rem;
+  }
+
+  .hours-page__checklist li {
+    padding-bottom: 0.9rem;
+    border-bottom: var(--border-thin);
+    font-weight: 600;
+  }
+
+  .hours-page__checklist li:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  @media (min-width: 64rem) {
+    .hours-page__grid {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.25fr);
+      align-items: start;
+    }
+  }
+</style>

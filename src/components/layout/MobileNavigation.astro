@@ -1,0 +1,194 @@
+---
+import { business } from "@/data/business";
+import { hourGroups } from "@/data/hours";
+import { navigationItems } from "@/data/navigation";
+
+interface Props {
+  pathname: string;
+}
+
+const { pathname } = Astro.props;
+---
+
+<div class="mobile-nav" data-mobile-nav>
+  <button
+    class="mobile-nav__toggle"
+    type="button"
+    aria-label="Otvori navigaciju"
+    aria-controls="site-mobile-menu"
+    aria-expanded="false"
+    data-mobile-nav-toggle
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <div class="mobile-nav__backdrop" hidden data-mobile-nav-backdrop></div>
+
+  <aside
+    class="mobile-nav__panel"
+    id="site-mobile-menu"
+    hidden
+    tabindex="-1"
+    data-mobile-nav-panel
+    aria-label="Glavna navigacija"
+  >
+    <nav class="mobile-nav__menu" aria-label="Glavna navigacija">
+      <ul role="list">
+        {navigationItems.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              aria-current={pathname === item.href ? "page" : undefined}
+              data-mobile-nav-link
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="mobile-nav__meta">
+      <div class="mobile-nav__group">
+        <p class="eyebrow">Danas i raspored</p>
+        <ul role="list">
+          {hourGroups.map((group) => (
+            <li data-day-group={group.key}>
+              <span>{group.daysLabel}</span>
+              <strong>{group.timeLabel}</strong>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="mobile-nav__group">
+        <p class="eyebrow">Kontakt</p>
+        <a href={business.phoneHref}>{business.phoneDisplay}</a>
+        <p>{business.addressDisplay}</p>
+      </div>
+
+      <a class="button-link" href={business.phoneHref}>Pozovi teretanu</a>
+    </div>
+  </aside>
+</div>
+
+<style>
+  .mobile-nav {
+    display: inline-flex;
+  }
+
+  .mobile-nav__toggle {
+    position: relative;
+    z-index: 60;
+    inline-size: 3rem;
+    block-size: 3rem;
+    border: 1px solid var(--color-ink);
+    background: var(--color-paper-strong);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.32rem;
+  }
+
+  .mobile-nav__toggle span {
+    inline-size: 1.35rem;
+    block-size: 2px;
+    background: var(--color-ink);
+    transition:
+      transform var(--transition-medium),
+      opacity var(--transition-medium);
+  }
+
+  .mobile-nav__toggle[data-open="true"] span:nth-child(1) {
+    transform: translateY(0.42rem) rotate(45deg);
+  }
+
+  .mobile-nav__toggle[data-open="true"] span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-nav__toggle[data-open="true"] span:nth-child(3) {
+    transform: translateY(-0.42rem) rotate(-45deg);
+  }
+
+  .mobile-nav__backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 45;
+    background: rgba(23, 23, 20, 0.66);
+  }
+
+  .mobile-nav__panel {
+    position: fixed;
+    inset: calc(var(--header-height) + 0.5rem) 1rem auto 1rem;
+    z-index: 50;
+    padding: 1.25rem;
+    border: var(--border-thin-dark);
+    background: var(--color-ink);
+    color: var(--color-paper-strong);
+    display: grid;
+    gap: 1.5rem;
+    max-height: calc(100vh - var(--header-height) - 1.5rem);
+    overflow: auto;
+  }
+
+  .mobile-nav__menu ul,
+  .mobile-nav__group ul {
+    list-style: none;
+  }
+
+  .mobile-nav__menu a {
+    display: block;
+    min-height: 2.75rem;
+    padding-block: 0.8rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.7rem, 7vw, 2.2rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-border-dark);
+  }
+
+  .mobile-nav__menu a[aria-current="page"] {
+    color: var(--color-amber-light);
+  }
+
+  .mobile-nav__meta {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .mobile-nav__group {
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .mobile-nav__group li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 0.2rem;
+  }
+
+  .mobile-nav__group strong {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+  }
+
+  @media (min-width: 64rem) {
+    .mobile-nav {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-nav__toggle span {
+      transition: none;
+    }
+  }
+</style>

@@ -1,0 +1,117 @@
+---
+import ActionLink from "@/components/global/ActionLink.astro";
+import SectionIndex from "@/components/global/SectionIndex.astro";
+import EquipmentIndex from "@/components/equipment/EquipmentIndex.astro";
+import Hero from "@/components/home/Hero.astro";
+import GraphicPause from "@/components/home/GraphicPause.astro";
+import QuickInfoStrip from "@/components/home/QuickInfoStrip.astro";
+import SpaceAtmosphere from "@/components/home/SpaceAtmosphere.astro";
+import HoursBoard from "@/components/hours/HoursBoard.astro";
+import LocationPanel from "@/components/location/LocationPanel.astro";
+import MembershipTables from "@/components/memberships/MembershipTables.astro";
+import HygieneNotice from "@/components/rules/HygieneNotice.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { pageMeta } from "@/data/site";
+---
+
+<BaseLayout
+  title={pageMeta.home.title}
+  description={pageMeta.home.description}
+  pathname="/"
+>
+  <Hero />
+  <QuickInfoStrip />
+  <EquipmentIndex />
+  <GraphicPause />
+
+  <section class="section">
+    <div class="site-container home-section-grid">
+      <div class="home-section-grid__intro">
+        <SectionIndex number="02" label="ČLANARINE" />
+        <h2 class="section-title">Redovne članarine</h2>
+        <p class="section-lead">
+          Cijene su prikazane otvoreno, bez tabova, bez skrivenih nivoa i bez
+          generičke logike “najpopularnijeg paketa”.
+        </p>
+      </div>
+
+      <div class="home-section-grid__content">
+        <MembershipTables />
+        <p class="home-note">Navedene su redovne cijene članarina.</p>
+        <ActionLink href="/clanarine/" label="Pogledaj cijeli cjenovnik" />
+      </div>
+    </div>
+  </section>
+
+  <SpaceAtmosphere />
+
+  <section class="section">
+    <div class="site-container home-section-grid">
+      <div class="home-section-grid__intro">
+        <SectionIndex number="04" label="RADNO VRIJEME" />
+        <h2 class="section-title">Kada možeš trenirati</h2>
+        <p class="section-lead">
+          Sedmični pregled je namjerno funkcionalan: radni dani do 22:00, vikend
+          do 20:00, bez sitnih kolona koje na telefonu postaju nečitljive.
+        </p>
+      </div>
+
+      <div class="home-section-grid__content">
+        <HoursBoard />
+        <ActionLink
+          href="/radno-vrijeme-i-pravila/"
+          label="Informacije prije dolaska"
+        />
+      </div>
+    </div>
+  </section>
+
+  <HygieneNotice />
+
+  <section class="section">
+    <div class="site-container home-section-grid">
+      <div class="home-section-grid__intro">
+        <SectionIndex number="06" label="LOKACIJA" />
+        <h2 class="section-title">Trg Miloša Obilića, Bratunac</h2>
+        <p class="section-lead">
+          Adresa, poziv i mapa stoje na završetku stranice kao praktičan sljedeći
+          korak, bez izmišljene kontakt forme i bez nepotvrđenih detalja o ulazu.
+        </p>
+      </div>
+
+      <div class="home-section-grid__content">
+        <LocationPanel
+          heading="Poziv, mapa i Instagram"
+          intro="Za potvrdu aktuelnog rasporeda, cijena ili praktičnih detalja najdirektniji put su telefon i Instagram profil."
+          eyebrow="Direktan kontakt"
+          tag="h3"
+        />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .home-section-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .home-section-grid__intro,
+  .home-section-grid__content {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .home-note {
+    color: var(--color-text-muted);
+    font-weight: 600;
+  }
+
+  @media (min-width: 64rem) {
+    .home-section-grid {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr);
+      align-items: start;
+    }
+  }
+</style>

@@ -1,0 +1,49 @@
+---
+import ActionLink from "@/components/global/ActionLink.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { pageMeta } from "@/data/site";
+---
+
+<BaseLayout
+  title={pageMeta["404"].title}
+  description={pageMeta["404"].description}
+  pathname="/404.html"
+>
+  <section class="not-found section">
+    <div class="site-container not-found__grid">
+      <p class="eyebrow">404 / NIJE PRONAĐENO</p>
+      <h1>Tražena stranica nije dostupna.</h1>
+      <p>
+        Vrati se na početnu, provjeri članarine ili otvori kontakt podatke
+        Techno Gyma u Bratuncu.
+      </p>
+      <div class="not-found__actions">
+        <ActionLink href="/" label="Idi na početnu" variant="primary" />
+        <ActionLink href="/clanarine/" label="Pogledaj članarine" />
+        <ActionLink href="/kontakt/" label="Kontakt i lokacija" />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found__grid {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+    max-width: 44rem;
+  }
+
+  .not-found h1 {
+    font-size: clamp(3rem, 9vw, 7rem);
+    line-height: 0.9;
+    text-transform: uppercase;
+    letter-spacing: -0.035em;
+  }
+
+  .not-found__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem 1rem;
+  }
+</style>

@@ -1,0 +1,91 @@
+---
+import ActionLink from "@/components/global/ActionLink.astro";
+import SectionIndex from "@/components/global/SectionIndex.astro";
+import HoursBoard from "@/components/hours/HoursBoard.astro";
+import LocationPanel from "@/components/location/LocationPanel.astro";
+import MembershipTables from "@/components/memberships/MembershipTables.astro";
+import { pageMeta } from "@/data/site";
+import PageLayout from "@/layouts/PageLayout.astro";
+---
+
+<PageLayout
+  title={pageMeta.memberships.title}
+  description={pageMeta.memberships.description}
+  pathname="/clanarine/"
+  h1="Cijene članarina"
+  intro="Prikazane su redovne cijene mjesečnih, tromjesečnih, šestomjesečnih i godišnjih članarina za žene i muškarce."
+  eyebrow="ČLANARINE / REDOVNE CIJENE"
+>
+  <Fragment slot="actions">
+    <ActionLink href="/kontakt/" label="Pozovi teretanu" variant="primary" />
+    <ActionLink href="/radno-vrijeme-i-pravila/" label="Provjeri radno vrijeme" />
+  </Fragment>
+
+  <section class="section">
+    <div class="site-container pricing-page__grid">
+      <div class="pricing-page__intro">
+        <SectionIndex number="01" label="REDOVNE CIJENE" />
+        <h2 class="section-title">Dvije jasne evidencione tabele</h2>
+        <p class="section-lead">
+          Cjenovnik je podijeljen na žene i muškarce, bez marketinških kartica i
+          bez skrivenih uslova koje dokumentacija ne potvrđuje.
+        </p>
+        <p class="pricing-page__note">
+          Navedene su redovne cijene članarina. Aktuelne izmjene ili akcije
+          provjeri direktno telefonom ili putem Instagram profila.
+        </p>
+      </div>
+
+      <div class="pricing-page__tables">
+        <MembershipTables />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="site-container pricing-page__grid">
+      <div class="pricing-page__intro">
+        <SectionIndex number="02" label="RADNO VRIJEME" />
+        <h2 class="section-title">Kada možeš koristiti članarinu</h2>
+      </div>
+      <div class="pricing-page__tables">
+        <HoursBoard />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="site-container pricing-page__location">
+      <LocationPanel
+        heading="Poziv i adresa prije učlanjenja"
+        intro="Ako želiš da potvrdiš iznos, raspored ili praktične detalje prije dolaska, najkraći put je poziv ili mapa po tekstualnoj adresi."
+        eyebrow="Kontakt prije dolaska"
+      />
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .pricing-page__grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .pricing-page__intro,
+  .pricing-page__tables {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .pricing-page__note {
+    color: var(--color-text-muted);
+    font-weight: 600;
+  }
+
+  @media (min-width: 64rem) {
+    .pricing-page__grid {
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.3fr);
+      align-items: start;
+    }
+  }
+</style>

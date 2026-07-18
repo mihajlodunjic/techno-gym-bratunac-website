@@ -1,0 +1,99 @@
+---
+import Breadcrumbs from "@/components/global/Breadcrumbs.astro";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import type { BreadcrumbItem } from "@/types/business";
+
+interface Props {
+  title: string;
+  description: string;
+  pathname: string;
+  h1: string;
+  intro: string;
+  eyebrow: string;
+}
+
+const { title, description, pathname, h1, intro, eyebrow } = Astro.props;
+
+const breadcrumbs: BreadcrumbItem[] = [
+  {
+    href: "/",
+    label: "Početna"
+  },
+  {
+    href: pathname,
+    label: h1
+  }
+];
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  pathname={pathname}
+  breadcrumbs={breadcrumbs}
+>
+  <section class="page-intro section-tight">
+    <div class="site-container page-intro__grid">
+      <div class="page-intro__meta">
+        <p class="locality-tag">{eyebrow}</p>
+        <Breadcrumbs items={breadcrumbs} />
+      </div>
+
+      <div class="page-intro__copy">
+        <h1>{h1}</h1>
+        <p>{intro}</p>
+        <div class="page-intro__actions">
+          <slot name="actions" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <slot />
+</BaseLayout>
+
+<style>
+  .page-intro {
+    border-bottom: var(--border-thin);
+  }
+
+  .page-intro__grid {
+    display: grid;
+    gap: 1.5rem;
+    align-items: end;
+  }
+
+  .page-intro__meta {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .page-intro__copy {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .page-intro__copy h1 {
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 0.9;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+  }
+
+  .page-intro__copy p {
+    font-size: var(--lead-size);
+    color: var(--color-ink-soft);
+  }
+
+  .page-intro__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+  }
+
+  @media (min-width: 48rem) {
+    .page-intro__grid {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr);
+    }
+  }
+</style>

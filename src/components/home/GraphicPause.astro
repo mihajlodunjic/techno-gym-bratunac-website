@@ -1,0 +1,112 @@
+---
+import BrandLines from "@/components/global/BrandLines.astro";
+---
+
+<section class="graphic-pause section" aria-labelledby="graphic-pause-title">
+  <div class="site-container graphic-pause__grid">
+    <div class="graphic-pause__plate panel panel--ink" aria-hidden="true">
+      <BrandLines tone="light" />
+      <div class="graphic-pause__bands">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="graphic-pause__window">
+        <span>SELECTION</span>
+        <span>CARDIO</span>
+        <span>SVJETLO</span>
+      </div>
+    </div>
+
+    <div class="graphic-pause__caption">
+      <p class="eyebrow">BRATUNAC / TECHNOGYM</p>
+      <h2 id="graphic-pause-title">Prostor sa dosta prirodnog svjetla</h2>
+      <p>
+        Kada se smiri ritam između tabela i oznaka, ostaje ono što je potvrđeno:
+        prijatan prostor, dnevno svjetlo i dovoljno jasna organizacija da
+        trening ne zavisi od marketinške buke.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .graphic-pause {
+    background: linear-gradient(
+      180deg,
+      var(--color-paper) 0%,
+      #ebe5da 48%,
+      var(--color-paper) 100%
+    );
+  }
+
+  .graphic-pause__grid {
+    display: grid;
+    gap: 1.5rem;
+    align-items: end;
+  }
+
+  .graphic-pause__plate {
+    min-height: clamp(20rem, 42vw, 34rem);
+    padding: 1.25rem;
+    overflow: clip;
+    display: grid;
+    align-content: end;
+  }
+
+  .graphic-pause__bands {
+    position: absolute;
+    inset: 1.25rem 1.25rem auto 1.25rem;
+    display: grid;
+    gap: 0.65rem;
+  }
+
+  .graphic-pause__bands span {
+    display: block;
+    inline-size: clamp(3rem, 14vw, 9rem);
+    block-size: 0.28rem;
+    background: linear-gradient(
+      90deg,
+      var(--color-amber) 0%,
+      var(--color-orange) 100%
+    );
+  }
+
+  .graphic-pause__window {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .graphic-pause__window span {
+    display: inline-flex;
+    align-items: center;
+    inline-size: fit-content;
+    padding: 0.45rem 0.7rem;
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    border: 1px solid rgba(255, 253, 247, 0.3);
+    background: rgba(255, 253, 247, 0.06);
+  }
+
+  .graphic-pause__caption {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .graphic-pause__caption h2 {
+    font-size: clamp(2.4rem, 7vw, 5rem);
+    line-height: 0.92;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+  }
+
+  @media (min-width: 64rem) {
+    .graphic-pause__grid {
+      grid-template-columns: minmax(0, 1.35fr) minmax(18rem, 0.65fr);
+    }
+  }
+</style>

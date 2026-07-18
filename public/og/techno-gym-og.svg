@@ -1,0 +1,98 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="1200"
+  height="630"
+  viewBox="0 0 1200 630"
+  role="img"
+  aria-labelledby="title desc"
+>
+  <title id="title">Techno Gym Bratunac social preview</title>
+  <desc id="desc">Originalna Technogym oprema u centru Bratunca.</desc>
+  <defs>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFD46A" />
+      <stop offset="58%" stop-color="#F2B548" />
+      <stop offset="100%" stop-color="#ED9148" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#F4F0E7" />
+  <rect x="56" y="56" width="360" height="518" fill="url(#brand)" stroke="#171714" stroke-width="2" />
+  <rect x="472" y="56" width="672" height="518" fill="#171714" />
+  <line x1="472" y1="198" x2="1144" y2="198" stroke="#4C4A43" stroke-width="1" />
+  <line x1="472" y1="428" x2="1144" y2="428" stroke="#4C4A43" stroke-width="1" />
+  <line x1="664" y1="56" x2="664" y2="574" stroke="#4C4A43" stroke-width="1" />
+  <image href="/logo.jpg" x="141" y="127" width="190" height="190" preserveAspectRatio="xMidYMid meet" />
+  <text
+    x="520"
+    y="150"
+    fill="#FFD46A"
+    font-family="Barlow Condensed, Arial Narrow, sans-serif"
+    font-size="34"
+    font-weight="700"
+    letter-spacing="4"
+  >
+    TECHNO GYM BRATUNAC
+  </text>
+  <text
+    x="520"
+    y="298"
+    fill="#FFFDF7"
+    font-family="Barlow Condensed, Arial Narrow, sans-serif"
+    font-size="112"
+    font-weight="800"
+    letter-spacing="-4"
+  >
+    ORIGINALNA
+  </text>
+  <text
+    x="520"
+    y="392"
+    fill="#FFFDF7"
+    font-family="Barlow Condensed, Arial Narrow, sans-serif"
+    font-size="112"
+    font-weight="800"
+    letter-spacing="-4"
+  >
+    TECHNOGYM OPREMA
+  </text>
+  <text
+    x="520"
+    y="486"
+    fill="#FFFDF7"
+    font-family="Barlow Condensed, Arial Narrow, sans-serif"
+    font-size="112"
+    font-weight="800"
+    letter-spacing="-4"
+  >
+    U BRATUNCU
+  </text>
+  <text
+    x="96"
+    y="390"
+    fill="#171714"
+    font-family="Barlow Condensed, Arial Narrow, sans-serif"
+    font-size="28"
+    font-weight="700"
+    letter-spacing="3"
+  >
+    SELECTION / CARDIO / 04 TRAKE
+  </text>
+  <text
+    x="96"
+    y="438"
+    fill="#171714"
+    font-family="Source Sans 3, Segoe UI, Arial, sans-serif"
+    font-size="26"
+  >
+    Technogym oprema • Trg Miloša Obilića
+  </text>
+  <text
+    x="520"
+    y="542"
+    fill="#DDD7CA"
+    font-family="Source Sans 3, Segoe UI, Arial, sans-serif"
+    font-size="28"
+  >
+    Članarine, radno vrijeme i kontakt u jednom statičkom pregledu.
+  </text>
+</svg>

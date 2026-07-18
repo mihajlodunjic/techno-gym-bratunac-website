@@ -1,0 +1,58 @@
+---
+import type { BreadcrumbItem } from "@/types/business";
+
+interface Props {
+  items: BreadcrumbItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav class="breadcrumbs" aria-label="Putanja stranice">
+  <ol role="list">
+    {items.map((item, index) => {
+      const isLast = index === items.length - 1;
+
+      return (
+        <li>
+          {isLast ? (
+            <span aria-current="page">{item.label}</span>
+          ) : (
+            <a href={item.href}>{item.label}</a>
+          )}
+        </li>
+      );
+    })}
+  </ol>
+</nav>
+
+<style>
+  .breadcrumbs ol {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    list-style: none;
+  }
+
+  .breadcrumbs li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .breadcrumbs li:not(:last-child)::after {
+    content: "/";
+    color: var(--color-border-dark);
+  }
+
+  .breadcrumbs a {
+    text-decoration: underline;
+    text-decoration-color: transparent;
+  }
+
+  .breadcrumbs a:hover {
+    text-decoration-color: var(--color-amber);
+  }
+</style>

@@ -1,0 +1,72 @@
+---
+import Footer from "@/components/layout/Footer.astro";
+import Header from "@/components/layout/Header.astro";
+import SkipLink from "@/components/layout/SkipLink.astro";
+import StructuredData from "@/components/seo/StructuredData.astro";
+import { business } from "@/data/business";
+import { canonicalBaseUrl, siteConfig, toAbsoluteUrl } from "@/data/site";
+import type { BreadcrumbItem } from "@/types/business";
+import "@/styles/fonts.css";
+import "@/styles/tokens.css";
+import "@/styles/reset.css";
+import "@/styles/layout.css";
+import "@/styles/utilities.css";
+import "@/styles/global.css";
+import currentDayScript from "@/scripts/current-day.ts?raw";
+import mobileNavigationScript from "@/scripts/mobile-navigation.ts?raw";
+
+interface Props {
+  title: string;
+  description: string;
+  pathname: string;
+  breadcrumbs?: BreadcrumbItem[];
+}
+
+const { title, description, pathname, breadcrumbs = [] } = Astro.props;
+const pageUrl = toAbsoluteUrl(pathname);
+const ogImageUrl = toAbsoluteUrl(siteConfig.socialImagePath);
+const isIndexable =
+  Boolean(canonicalBaseUrl) &&
+  !canonicalBaseUrl.includes("localhost") &&
+  !canonicalBaseUrl.includes("127.0.0.1");
+---
+
+<!doctype html>
+<html lang={business.language}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#171714" />
+    <meta name="robots" content={isIndexable ? "index, follow" : "noindex, nofollow"} />
+    {pageUrl && <link rel="canonical" href={pageUrl} />}
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/logo.jpg" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    {pageUrl && <meta property="og:url" content={pageUrl} />}
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+    <meta property="og:site_name" content={siteConfig.name} />
+    <meta property="og:locale" content={siteConfig.ogLocale} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
+    <StructuredData pathname={pathname} breadcrumbs={breadcrumbs} />
+  </head>
+  <body>
+    <div class="site-shell">
+      <SkipLink />
+      <Header pathname={pathname} />
+      <main id="main-content" class="page-surface">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+    <script is:inline set:html={mobileNavigationScript}></script>
+    <script is:inline set:html={currentDayScript}></script>
+  </body>
+</html>

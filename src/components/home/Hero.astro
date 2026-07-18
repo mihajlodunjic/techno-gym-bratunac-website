@@ -1,0 +1,237 @@
+---
+import { Image } from "astro:assets";
+import BrandLines from "@/components/global/BrandLines.astro";
+import ActionLink from "@/components/global/ActionLink.astro";
+import logo from "@/assets/logo/logo.jpg";
+import { business } from "@/data/business";
+import { hourGroups } from "@/data/hours";
+---
+
+<section class="hero section-tight">
+  <div class="site-container hero__grid">
+    <div class="hero__copy">
+      <p class="locality-tag">{business.localityLabel}</p>
+      <h1>
+        <span>Originalna Technogym</span>
+        <span>oprema u centru</span>
+        <span>Bratunca.</span>
+      </h1>
+      <p class="hero__lead">
+        Technogym Selection sprave za različite mišićne grupe, cardio zona sa
+        četiri trake za trčanje i radno vrijeme prilagođeno svakodnevnom
+        treningu.
+      </p>
+      <div class="hero__actions">
+        <ActionLink href="/clanarine/" label="Pogledaj članarine" variant="primary" />
+        <ActionLink href="/radno-vrijeme-i-pravila/" label="Provjeri radno vrijeme" />
+      </div>
+    </div>
+
+    <div class="hero__visual">
+      <article class="hero__panel hero__panel--amber panel panel--amber">
+        <BrandLines />
+        <div class="hero__panel-head">
+          <p class="eyebrow">TECHNOGYM / SELECTION</p>
+          <div class="hero__stamp">
+            <Image
+              src={logo}
+              alt=""
+              width={150}
+              height={150}
+              densities={[1]}
+              format="webp"
+              loading="eager"
+            />
+          </div>
+        </div>
+        <p class="hero__panel-copy">
+          Originalna Technogym oprema i Selection linija čine jezgro prostora za
+          svakodnevni trening.
+        </p>
+      </article>
+
+      <article class="hero__panel hero__panel--ink panel panel--ink">
+        <div class="hero__count-head">
+          <p class="eyebrow">CARDIO / 04</p>
+          <p class="hero__count-note">Potvrđena količina</p>
+        </div>
+        <div class="hero__count">04</div>
+        <p class="hero__count-copy">
+          Četiri originalne Technogym trake za trčanje u cardio zoni.
+        </p>
+      </article>
+    </div>
+  </div>
+
+  <div class="site-container">
+    <div class="hero__meta">
+      <p>{business.shortName}</p>
+      <p>{business.addressDisplay}</p>
+      <p>{business.phoneDisplay}</p>
+      <p>{hourGroups[0].daysLabel} {hourGroups[0].timeLabel}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding-block: clamp(2.5rem, 5vw, 4rem) clamp(2.5rem, 6vw, 4.5rem);
+  }
+
+  .hero__grid {
+    display: grid;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .hero__copy {
+    display: grid;
+    gap: 1.15rem;
+    align-content: start;
+  }
+
+  .hero h1 {
+    font-size: var(--hero-size);
+    line-height: 0.86;
+    letter-spacing: -0.035em;
+    text-transform: uppercase;
+    max-width: 11ch;
+  }
+
+  .hero h1 span {
+    display: block;
+  }
+
+  .hero__lead {
+    font-size: var(--lead-size);
+    color: var(--color-ink-soft);
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem 1rem;
+  }
+
+  .hero__visual {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .hero__panel {
+    min-height: 16rem;
+    padding: 1.25rem;
+    overflow: clip;
+  }
+
+  .hero__panel--amber {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .hero__panel-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: flex-start;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero__stamp {
+    inline-size: clamp(3rem, 5vw, 4rem);
+    background: rgba(255, 253, 247, 0.3);
+    border: 1px solid rgba(23, 23, 20, 0.24);
+    padding: 0.25rem;
+  }
+
+  .hero__stamp :global(img) {
+    inline-size: 100%;
+    block-size: auto;
+    object-fit: contain;
+    aspect-ratio: 1;
+  }
+
+  .hero__panel-copy {
+    position: relative;
+    z-index: 1;
+    max-width: 24rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: rgba(23, 23, 20, 0.86);
+  }
+
+  .hero__panel--ink {
+    display: grid;
+    gap: 0.6rem;
+    align-content: end;
+  }
+
+  .hero__count-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: baseline;
+  }
+
+  .hero__count-note {
+    color: rgba(255, 253, 247, 0.7);
+  }
+
+  .hero__count {
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 20vw, 8rem);
+    line-height: 0.78;
+    letter-spacing: -0.06em;
+    max-width: 100%;
+  }
+
+  .hero__count-copy {
+    max-width: 18rem;
+  }
+
+  .hero__meta {
+    margin-top: 1.25rem;
+    display: grid;
+    gap: 0;
+    border: var(--border-thin);
+    background: var(--color-paper-strong);
+  }
+
+  .hero__meta p {
+    padding: 0.9rem 1rem;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-bottom: var(--border-thin);
+  }
+
+  .hero__meta p:last-child {
+    border-bottom: 0;
+  }
+
+  @media (min-width: 48rem) {
+    .hero__meta {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .hero__meta p {
+      border-bottom: 0;
+      border-right: var(--border-thin);
+    }
+
+    .hero__meta p:last-child {
+      border-right: 0;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .hero__grid {
+      grid-template-columns: minmax(0, 1.2fr) minmax(20rem, 0.85fr);
+      gap: 2rem;
+    }
+  }
+</style>

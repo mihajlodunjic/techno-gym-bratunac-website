@@ -1,0 +1,159 @@
+---
+import { Image } from "astro:assets";
+import logo from "@/assets/logo/logo.jpg";
+import { business } from "@/data/business";
+import { hourGroups } from "@/data/hours";
+import { navigationItems } from "@/data/navigation";
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="site-container site-footer__grid">
+    <div class="site-footer__brand">
+      <Image
+        src={logo}
+        alt="Techno Gym logotip"
+        width={150}
+        height={150}
+        densities={[1]}
+        format="webp"
+      />
+      <div class="site-footer__brand-copy">
+        <p class="eyebrow">Techno Gym Bratunac</p>
+        <p>{business.description}</p>
+        <p class="locality-tag">{business.localityLabel}</p>
+      </div>
+    </div>
+
+    <nav class="site-footer__nav" aria-label="Navigacioni indeks">
+      <p class="eyebrow">Navigacija</p>
+      <ul role="list">
+        {navigationItems.map((item) => (
+          <li>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="site-footer__contact">
+      <p class="eyebrow">Kontakt</p>
+      <p>{business.addressDisplay}</p>
+      <p>
+        <a href={business.phoneHref}>{business.phoneDisplay}</a>
+      </p>
+      <p>
+        <a href={business.instagramUrl} target="_blank" rel="noreferrer">
+          {business.instagramHandle}
+        </a>
+      </p>
+    </div>
+
+    <div class="site-footer__hours">
+      <p class="eyebrow">Radno vrijeme</p>
+      <ul role="list">
+        {hourGroups.map((group) => (
+          <li>
+            <span>{group.daysLabel}</span>
+            <strong>{group.timeLabel}</strong>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <div class="site-container site-footer__bottom">
+    <p>© {currentYear} Techno Gym Bratunac</p>
+    <span class="three-slashes" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </span>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: clamp(3rem, 6vw, 4.5rem) 2rem;
+    background: var(--color-ink);
+    color: var(--color-paper-strong);
+    border-top: var(--border-thin-dark);
+  }
+
+  .site-footer__grid {
+    display: grid;
+    gap: 2rem;
+  }
+
+  .site-footer__brand {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .site-footer__brand :global(img) {
+    inline-size: clamp(3.2rem, 5vw, 4.2rem);
+    block-size: auto;
+    aspect-ratio: 1;
+    object-fit: contain;
+  }
+
+  .site-footer__brand-copy {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .site-footer__brand-copy .locality-tag {
+    color: var(--color-paper-strong);
+  }
+
+  .site-footer__nav ul,
+  .site-footer__hours ul {
+    list-style: none;
+  }
+
+  .site-footer__nav,
+  .site-footer__contact,
+  .site-footer__hours {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .site-footer__hours li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    border-bottom: 1px solid var(--color-border-dark);
+    padding-bottom: 0.5rem;
+  }
+
+  .site-footer__hours strong {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+  }
+
+  .site-footer__bottom {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    border-top: 1px solid var(--color-border-dark);
+    color: rgba(255, 253, 247, 0.78);
+  }
+
+  @media (min-width: 48rem) {
+    .site-footer__grid {
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      align-items: start;
+    }
+  }
+
+  @media (max-width: 30rem) {
+    .site-footer__bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

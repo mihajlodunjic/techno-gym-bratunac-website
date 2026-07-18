@@ -1,0 +1,59 @@
+:root {
+  color-scheme: light;
+  --color-ink: #171714;
+  --color-ink-soft: #2b2a26;
+  --color-paper: #f4f0e7;
+  --color-paper-strong: #fffdf7;
+  --color-muted: #ddd7ca;
+  --color-text-muted: #68645b;
+  --color-amber: #f2b548;
+  --color-amber-light: #ffd46a;
+  --color-orange: #ed9148;
+  --color-border: #a9a294;
+  --color-border-dark: #4c4a43;
+  --color-success: #218548;
+  --color-error: #b44137;
+  --font-display: "Barlow Condensed", "Arial Narrow", "Roboto Condensed",
+    sans-serif;
+  --font-body: "Source Sans 3", "Segoe UI", Arial, sans-serif;
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4.5rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+  --radius-control: 0.375rem;
+  --border-thin: 1px solid var(--color-border);
+  --border-thin-dark: 1px solid var(--color-border-dark);
+  --border-strong: 2px solid var(--color-ink);
+  --page-padding: clamp(1rem, 2.2vw, 2.5rem);
+  --max-width: 90rem;
+  --text-measure: 68ch;
+  --hero-size: clamp(3.25rem, 9vw, 8.75rem);
+  --h2-size: clamp(2.5rem, 6vw, 5.75rem);
+  --h3-size: clamp(1.75rem, 3vw, 2.8rem);
+  --lead-size: clamp(1.125rem, 2vw, 1.45rem);
+  --body-size: 1rem;
+  --label-size: 0.84rem;
+  --price-size: clamp(2.8rem, 4vw, 4.5rem);
+  --header-height: clamp(4.5rem, 7vw, 5.25rem);
+  --transition-fast: 160ms ease;
+  --transition-medium: 220ms ease;
+  --focus-ring: 3px solid var(--color-amber);
+  --focus-shadow: 0 0 0 6px rgba(23, 23, 20, 0.18);
+}
+
+html {
+  background: var(--color-paper);
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

@@ -1,0 +1,111 @@
+---
+import ActionLink from "@/components/global/ActionLink.astro";
+import BrandLines from "@/components/global/BrandLines.astro";
+import EquipmentSpec from "@/components/equipment/EquipmentSpec.astro";
+import GraphicPause from "@/components/home/GraphicPause.astro";
+import SpaceAtmosphere from "@/components/home/SpaceAtmosphere.astro";
+import { equipment } from "@/data/equipment";
+import { pageMeta } from "@/data/site";
+import PageLayout from "@/layouts/PageLayout.astro";
+---
+
+<PageLayout
+  title={pageMeta.equipment.title}
+  description={pageMeta.equipment.description}
+  pathname="/oprema-i-prostor/"
+  h1="Oprema i prostor"
+  intro="Izdvojene su samo potvrđene zone treninga: originalna Technogym oprema, Selection linija, cardio zona sa četiri trake i prijatan prostor sa dosta prirodnog svjetla."
+  eyebrow="OPREMA / BRATUNAC"
+>
+  <Fragment slot="actions">
+    <ActionLink href="/clanarine/" label="Pogledaj članarine" variant="primary" />
+    <ActionLink href="/kontakt/" label="Pozovi teretanu" />
+  </Fragment>
+
+  <section class="section">
+    <div class="site-container equipment-page__intro">
+      <article class="equipment-page__plate panel panel--amber">
+        <BrandLines />
+        <p class="eyebrow">POTVRĐENE ZONE TRENINGA</p>
+        <h2>Technogym Selection i cardio sa četiri trake</h2>
+        <p>
+          Stranica ne izmišlja kompletan inventar. Prikazuje ono što je potvrđeno
+          i dovoljno važno da utiče na odluku prije dolaska.
+        </p>
+      </article>
+
+      <div class="equipment-page__cards">
+        {equipment.map((item) => (
+          <EquipmentSpec item={item} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <GraphicPause />
+  <SpaceAtmosphere />
+
+  <section class="section">
+    <div class="site-container equipment-page__cta panel">
+      <div>
+        <p class="eyebrow">SLJEDEĆI KORAK</p>
+        <h2>Pogledaj članarine ili pozovi prije dolaska</h2>
+      </div>
+      <div class="equipment-page__cta-links">
+        <ActionLink href="/clanarine/" label="Pogledaj članarine" variant="primary" />
+        <ActionLink href="/kontakt/" label="Kontakt i lokacija" />
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .equipment-page__intro {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .equipment-page__plate {
+    padding: 1.25rem;
+    display: grid;
+    gap: 0.85rem;
+    overflow: clip;
+  }
+
+  .equipment-page__plate h2,
+  .equipment-page__cta h2 {
+    font-size: clamp(2.3rem, 6vw, 4.4rem);
+    line-height: 0.92;
+    text-transform: uppercase;
+    letter-spacing: -0.03em;
+  }
+
+  .equipment-page__cards {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .equipment-page__cta {
+    padding: 1.25rem;
+    display: grid;
+    gap: 1rem;
+  }
+
+  .equipment-page__cta-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem 1rem;
+  }
+
+  @media (min-width: 64rem) {
+    .equipment-page__intro {
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.2fr);
+      align-items: start;
+    }
+
+    .equipment-page__cta {
+      grid-template-columns: minmax(0, 1.2fr) auto;
+      align-items: end;
+    }
+  }
+</style>

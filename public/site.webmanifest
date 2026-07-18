@@ -1,0 +1,21 @@
+{
+  "name": "Techno Gym Bratunac",
+  "short_name": "Techno Gym",
+  "lang": "sr-Latn-BA",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4f0e7",
+  "theme_color": "#171714",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/logo.jpg",
+      "sizes": "150x150",
+      "type": "image/jpeg"
+    }
+  ]
+}

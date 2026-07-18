@@ -1,0 +1,121 @@
+---
+import ActionLink from "@/components/global/ActionLink.astro";
+import PhoneLink from "@/components/global/PhoneLink.astro";
+import { business } from "@/data/business";
+import { hourGroups } from "@/data/hours";
+
+interface Props {
+  heading: string;
+  intro?: string;
+  tag?: "h2" | "h3";
+  eyebrow?: string;
+}
+
+const {
+  heading,
+  intro,
+  tag = "h2",
+  eyebrow = "Kontakt i lokacija"
+} = Astro.props;
+const HeadingTag = tag;
+---
+
+<div class="location-panel panel">
+  <div class="location-panel__main">
+    <p class="eyebrow">{eyebrow}</p>
+    <HeadingTag class="location-panel__title">{heading}</HeadingTag>
+    {intro && <p class="location-panel__intro">{intro}</p>}
+    <PhoneLink href={business.phoneHref} label={business.phoneDisplay} />
+
+    <div class="location-panel__links">
+      <ActionLink href={business.mapQueryUrl} label="Otvori u mapama" external />
+      <ActionLink href={business.instagramUrl} label="Otvori Instagram" external />
+    </div>
+  </div>
+
+  <aside class="location-panel__side">
+    <div class="location-panel__info">
+      <p class="eyebrow">Adresa</p>
+      <p>{business.addressDisplay}</p>
+    </div>
+    <div class="location-panel__info">
+      <p class="eyebrow">Radno vrijeme</p>
+      <ul role="list">
+        {hourGroups.map((group) => (
+          <li data-day-group={group.key}>
+            <span>{group.daysLabel}</span>
+            <strong>{group.timeLabel}</strong>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div class="location-panel__info">
+      <p class="eyebrow">Poštanski broj</p>
+      <p>{business.postalCode}</p>
+    </div>
+  </aside>
+</div>
+
+<style>
+  .location-panel {
+    padding: clamp(1.25rem, 4vw, 2rem);
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  .location-panel__main,
+  .location-panel__side {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .location-panel__title {
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+  }
+
+  .location-panel__intro {
+    font-size: 1.1rem;
+    color: var(--color-ink-soft);
+  }
+
+  .location-panel__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem 1rem;
+  }
+
+  .location-panel__info {
+    display: grid;
+    gap: 0.5rem;
+    padding-top: 1rem;
+    border-top: var(--border-thin);
+  }
+
+  .location-panel__info ul {
+    list-style: none;
+    display: grid;
+    gap: 0.6rem;
+  }
+
+  .location-panel__info li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .location-panel__info strong {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+  }
+
+  @media (min-width: 64rem) {
+    .location-panel {
+      grid-template-columns: minmax(0, 1.25fr) minmax(16rem, 0.75fr);
+      align-items: start;
+    }
+  }
+</style>
