@@ -1,5 +1,11 @@
 export const getAllowedHref = (href: string) => {
-  return href.trim();
+  const normalizedHref = href.trim();
+
+  if (normalizedHref === "/" || normalizedHref.startsWith("#")) {
+    return normalizedHref;
+  }
+
+  return "/";
 };
 
 export const shouldUseExternalTarget = (href: string, external = false) =>
