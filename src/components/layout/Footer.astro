@@ -4,7 +4,7 @@ import logo from "@/assets/logo/logo.jpg";
 import { business } from "@/data/business";
 import { hourGroups } from "@/data/hours";
 import { navigationItems } from "@/data/navigation";
-import { getAllowedHref } from "@/utils/linkPolicy";
+import { getAllowedHref, shouldUseExternalTarget } from "@/utils/linkPolicy";
 
 const currentYear = new Date().getFullYear();
 ---
@@ -27,7 +27,7 @@ const currentYear = new Date().getFullYear();
       </div>
     </div>
 
-    <nav class="site-footer__nav" aria-label="Navigacioni indeks">
+    <nav class="site-footer__nav" aria-label="Navigacija u podnožju">
       <p class="eyebrow">Navigacija</p>
       <ul role="list">
         {navigationItems.map((item) => (
@@ -45,7 +45,11 @@ const currentYear = new Date().getFullYear();
         <a href={getAllowedHref(business.phoneHref)}>{business.phoneDisplay}</a>
       </p>
       <p>
-        <a href={getAllowedHref(business.instagramUrl)}>
+        <a
+          href={getAllowedHref(business.instagramUrl)}
+          target={shouldUseExternalTarget(business.instagramUrl, true) ? "_blank" : undefined}
+          rel={shouldUseExternalTarget(business.instagramUrl, true) ? "noreferrer" : undefined}
+        >
           {business.instagramHandle}
         </a>
       </p>

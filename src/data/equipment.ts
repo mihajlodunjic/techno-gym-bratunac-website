@@ -8,19 +8,19 @@ export const equipment: EquipmentRecord[] = [
     manufacturer: "Technogym",
     line: "Selection",
     description:
-      "Originalne Technogym Selection sprave namijenjene su treningu različitih mišićnih grupa i kontrolisanom podešavanju opterećenja.",
+      "Originalne Technogym Selection sprave omogućavaju podešavanje opterećenja za trening različitih mišićnih grupa.",
     sourceStatus: "confirmed"
   },
   {
     key: "cardio",
     title: "Cardio zona",
-    code: "CARDIO / 02",
+    code: "TECHNOGYM / CARDIO",
     manufacturer: "Technogym",
-    line: "Original cardio oprema",
+    line: "Cardio zona",
     description:
       "Cardio zona raspolaže sa četiri originalne Technogym trake za trčanje.",
     quantity: 4,
-    quantityLabel: "4 trake za trčanje",
+    quantityLabel: "trake za trčanje",
     sourceStatus: "confirmed"
   }
 ];

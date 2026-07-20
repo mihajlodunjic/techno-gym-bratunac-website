@@ -11,7 +11,7 @@ import PageLayout from "@/layouts/PageLayout.astro";
   description={pageMeta.contact.description}
   pathname="/kontakt/"
   h1="Kontakt i lokacija"
-  intro="Telefon, adresa, radno vrijeme i Instagram profil su potvrđeni kontakt kanali za Techno Gym Bratunac."
+  intro="Pozovi nas, pronađi adresu ili otvori Instagram profil Techno Gyma u Bratuncu."
   eyebrow="KONTAKT / TRG MILOŠA OBILIĆA"
 >
   <Fragment slot="actions">
@@ -23,7 +23,7 @@ import PageLayout from "@/layouts/PageLayout.astro";
     <div class="site-container">
       <LocationPanel
         heading="Trg Miloša Obilića, Bratunac"
-        intro="Za najdirektniju provjeru cijena, rasporeda ili dolaska koristi poziv, mapu po adresi ili Instagram profil."
+        intro="Za informacije o članarinama, radnom vremenu i dolasku, pozovi nas ili se javi putem Instagrama."
         eyebrow="Telefon, adresa i raspored"
       />
     </div>
@@ -33,10 +33,10 @@ import PageLayout from "@/layouts/PageLayout.astro";
     <div class="site-container contact-page__grid">
       <article class="contact-page__panel panel">
         <p class="eyebrow">Mapa</p>
-        <h2>Otvaranje mape bez iframe-a</h2>
+        <h2>Otvori lokaciju u mapama</h2>
         <p>
-          Link za mape koristi samo potvrđenu tekstualnu adresu. Nisu dodate
-          koordinate, parking ni opis ulaza koji dokumentacija ne potvrđuje.
+          Lokaciju možeš otvoriti direktno u mapama preko adrese Trg Miloša
+          Obilića, 75420 Bratunac.
         </p>
         <ActionLink href={business.mapQueryUrl} label="Otvori u mapama" external />
       </article>
@@ -45,9 +45,8 @@ import PageLayout from "@/layouts/PageLayout.astro";
         <p class="eyebrow">Instagram</p>
         <h2>Prati objave i obavještenja</h2>
         <p>
-          Instagram ostaje važan kanal za kratke vizuelne objave i praktična
-          obavještenja. Stare promotivne poruke nisu prenesene kao trajne
-          činjenice na sajtu.
+          Instagram profil koristi se za objave i praktična obavještenja iz
+          teretane.
         </p>
         <ActionLink href={business.instagramUrl} label="Otvori Instagram" external />
       </article>

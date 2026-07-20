@@ -3,7 +3,6 @@ import ActionLink from "@/components/global/ActionLink.astro";
 import SectionIndex from "@/components/global/SectionIndex.astro";
 import EquipmentIndex from "@/components/equipment/EquipmentIndex.astro";
 import Hero from "@/components/home/Hero.astro";
-import GraphicPause from "@/components/home/GraphicPause.astro";
 import QuickInfoStrip from "@/components/home/QuickInfoStrip.astro";
 import SpaceAtmosphere from "@/components/home/SpaceAtmosphere.astro";
 import HoursBoard from "@/components/hours/HoursBoard.astro";
@@ -22,7 +21,6 @@ import { pageMeta } from "@/data/site";
   <Hero />
   <QuickInfoStrip />
   <EquipmentIndex />
-  <GraphicPause />
 
   <section class="section">
     <div class="site-container home-section-grid">
@@ -30,8 +28,8 @@ import { pageMeta } from "@/data/site";
         <SectionIndex number="02" label="ČLANARINE" />
         <h2 class="section-title">Redovne članarine</h2>
         <p class="section-lead">
-          Cijene su prikazane otvoreno, bez tabova, bez skrivenih nivoa i bez
-          generičke logike “najpopularnijeg paketa”.
+          Izaberi mjesečnu, tromjesečnu, šestomjesečnu ili godišnju članarinu.
+          Ispod su prikazane redovne cijene.
         </p>
       </div>
 
@@ -51,8 +49,8 @@ import { pageMeta } from "@/data/site";
         <SectionIndex number="04" label="RADNO VRIJEME" />
         <h2 class="section-title">Kada možeš trenirati</h2>
         <p class="section-lead">
-          Sedmični pregled je namjerno funkcionalan: radni dani do 22:00, vikend
-          do 20:00, bez sitnih kolona koje na telefonu postaju nečitljive.
+          Radnim danima možeš trenirati od 10:00 do 22:00, a subotom i
+          nedjeljom od 10:00 do 20:00.
         </p>
       </div>
 
@@ -74,15 +72,15 @@ import { pageMeta } from "@/data/site";
         <SectionIndex number="06" label="LOKACIJA" />
         <h2 class="section-title">Trg Miloša Obilića, Bratunac</h2>
         <p class="section-lead">
-          Adresa, poziv i mapa stoje na završetku stranice kao praktičan sljedeći
-          korak, bez izmišljene kontakt forme i bez nepotvrđenih detalja o ulazu.
+          Techno Gym se nalazi na Trgu Miloša Obilića u Bratuncu. Za dodatne
+          informacije pozovi nas ili se javi putem Instagrama.
         </p>
       </div>
 
       <div class="home-section-grid__content">
         <LocationPanel
           heading="Poziv, mapa i Instagram"
-          intro="Za potvrdu aktuelnog rasporeda, cijena ili praktičnih detalja najdirektniji put su telefon i Instagram profil."
+          intro="Za informacije o članarinama, radnom vremenu i dolasku, pozovi nas ili se javi putem Instagrama."
           eyebrow="Direktan kontakt"
           tag="h3"
         />

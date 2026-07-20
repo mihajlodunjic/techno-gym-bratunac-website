@@ -13,7 +13,7 @@ import PageLayout from "@/layouts/PageLayout.astro";
   description={pageMeta.hours.description}
   pathname="/radno-vrijeme-i-pravila/"
   h1="Radno vrijeme i pravila"
-  intro="Sve praktične informacije prije dolaska stoje na jednom mjestu: sedmični raspored, obavezna čista obuća i kontakt za brzu provjeru."
+  intro="Pogledaj sedmični raspored i pravilo o čistoj obući i sportskoj opremi prije dolaska."
   eyebrow="RASPored / HIGIJENA"
 >
   <Fragment slot="actions">
@@ -27,8 +27,8 @@ import PageLayout from "@/layouts/PageLayout.astro";
         <SectionIndex number="01" label="SEDMICA" />
         <h2 class="section-title">Pregled radnog vremena</h2>
         <p class="section-lead">
-          Radnim danima do 22:00, vikendom do 20:00. Pregled je u HTML-u i bez
-          JavaScripta, a skript samo diskretno označava trenutni dan.
+          Radnim danima možeš trenirati od 10:00 do 22:00, a subotom i
+          nedjeljom od 10:00 do 20:00.
         </p>
       </div>
 
@@ -38,21 +38,21 @@ import PageLayout from "@/layouts/PageLayout.astro";
     </div>
   </section>
 
-  <HygieneNotice showAction={false} />
+  <HygieneNotice showAction={false} indexNumber="02" />
 
   <section class="section">
     <div class="site-container hours-page__grid">
       <div class="hours-page__intro">
         <SectionIndex number="03" label="PRIJE DOLASKA" />
-        <h2 class="section-title">Tri stvari koje vrijedi provjeriti</h2>
+        <h2 class="section-title">Prije treninga</h2>
       </div>
 
       <div class="hours-page__content">
         <div class="hours-page__checklist panel">
           <ul role="list">
-            <li>Provjeri raspored radnih dana i vikenda prije polaska.</li>
+            <li>Pogledaj raspored radnih dana i vikenda prije polaska.</li>
             <li>Ponesi čiste patike i čistu sportsku opremu za trening.</li>
-            <li>Ako želiš potvrdu aktuelnih detalja, nazovi teretanu.</li>
+            <li>Za dodatne informacije nazovi teretanu.</li>
           </ul>
         </div>
       </div>
@@ -63,7 +63,7 @@ import PageLayout from "@/layouts/PageLayout.astro";
     <div class="site-container">
       <LocationPanel
         heading="Lokacija i direktan kontakt"
-        intro="Mapa se vodi preko pune tekstualne adrese, bez izmišljenih koordinata i bez teškog iframe ugrađivanja."
+        intro="Techno Gym se nalazi na Trgu Miloša Obilića u Bratuncu."
         eyebrow="Lokacija"
       />
     </div>

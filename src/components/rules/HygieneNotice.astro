@@ -1,16 +1,19 @@
 ---
 import ActionLink from "@/components/global/ActionLink.astro";
+import SectionIndex from "@/components/global/SectionIndex.astro";
 
 interface Props {
   showAction?: boolean;
+  indexNumber?: string;
 }
 
-const { showAction = true } = Astro.props;
+const { showAction = true, indexNumber = "05" } = Astro.props;
 ---
 
 <section class="hygiene-notice section" id="pravila">
   <div class="site-container">
     <div class="hygiene-notice__panel panel panel--ink">
+      <SectionIndex number={indexNumber} label="PRAVILA" />
       <div class="hygiene-notice__status">
         <span aria-hidden="true"></span>
         <p class="eyebrow">Obavezno pravilo</p>
@@ -43,6 +46,11 @@ const { showAction = true } = Astro.props;
     display: grid;
     gap: 1rem;
     border-color: rgba(255, 253, 247, 0.24);
+  }
+
+  .hygiene-notice :global(.section-index),
+  .hygiene-notice :global(.section-index__number) {
+    color: var(--color-paper-strong);
   }
 
   .hygiene-notice__status {
