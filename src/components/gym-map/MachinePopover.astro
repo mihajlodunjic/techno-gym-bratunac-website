@@ -1,0 +1,108 @@
+<div class="gym-map-popover" id="gym-map-popover" hidden data-gym-map-popover role="dialog" aria-live="polite">
+  <button class="gym-map-popover__close" type="button" data-gym-map-popover-close aria-label="Zatvori prikaz sprave">
+    ×
+  </button>
+  <p class="gym-map-popover__meta eyebrow" data-gym-map-popover-meta></p>
+  <h3 class="gym-map-popover__title" id="gym-map-popover-title" data-gym-map-popover-title></h3>
+  <img
+    class="gym-map-popover__image"
+    src="/images/equipment/placeholder.svg"
+    alt=""
+    width="800"
+    height="600"
+    loading="lazy"
+    data-gym-map-popover-image
+  />
+</div>
+<div class="gym-map-popover-backdrop" hidden data-gym-map-popover-backdrop></div>
+
+<style>
+  .gym-map-popover {
+    position: absolute;
+    z-index: 8;
+    width: min(18rem, calc(100vw - 2rem));
+    padding: 0.9rem;
+    border: var(--border-strong);
+    background: var(--color-paper-strong);
+    color: var(--color-ink);
+    display: grid;
+    gap: 0.65rem;
+  }
+
+  .gym-map-popover[hidden],
+  .gym-map-popover-backdrop[hidden] {
+    display: none !important;
+  }
+
+  .gym-map-popover__close {
+    position: absolute;
+    inset-block-start: 0.5rem;
+    inset-inline-end: 0.5rem;
+    inline-size: 2.6rem;
+    block-size: 2.6rem;
+    border: 1px solid var(--color-ink);
+    background: var(--color-paper-strong);
+    color: var(--color-ink);
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .gym-map-popover:not([data-locked="true"]) .gym-map-popover__close {
+    display: none;
+  }
+
+  .gym-map-popover__meta {
+    padding-inline-end: 2.75rem;
+    color: var(--color-text-muted);
+  }
+
+  .gym-map-popover__title {
+    padding-inline-end: 2.75rem;
+    font-size: clamp(1.45rem, 2.4vw, 2rem);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+  }
+
+  .gym-map-popover__image {
+    inline-size: 100%;
+    block-size: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border: 1px solid var(--color-ink);
+    background: var(--color-paper);
+  }
+
+  .gym-map-popover-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 7;
+    background: rgba(23, 23, 20, 0.24);
+  }
+
+  @media (max-width: 63.9375rem), (hover: none), (pointer: coarse) {
+    .gym-map-popover {
+      position: fixed;
+      inset-inline: 0;
+      inset-block: auto 0;
+      width: auto;
+      max-height: min(45svh, 24rem);
+      padding: 1rem 1rem calc(1rem + env(safe-area-inset-bottom, 0px));
+      border-inline: 0;
+      border-bottom: 0;
+      overflow: auto;
+    }
+
+    .gym-map-popover__close {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gym-map-popover__image {
+      max-height: 11rem;
+      object-fit: cover;
+    }
+  }
+</style>

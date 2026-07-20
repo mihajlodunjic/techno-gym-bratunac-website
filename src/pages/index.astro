@@ -3,8 +3,8 @@ import ActionLink from "@/components/global/ActionLink.astro";
 import SectionIndex from "@/components/global/SectionIndex.astro";
 import EquipmentIndex from "@/components/equipment/EquipmentIndex.astro";
 import Hero from "@/components/home/Hero.astro";
+import InteractiveGymMap from "@/components/home/InteractiveGymMap.astro";
 import QuickInfoStrip from "@/components/home/QuickInfoStrip.astro";
-import SpaceAtmosphere from "@/components/home/SpaceAtmosphere.astro";
 import HoursBoard from "@/components/hours/HoursBoard.astro";
 import LocationPanel from "@/components/location/LocationPanel.astro";
 import MembershipTables from "@/components/memberships/MembershipTables.astro";
@@ -21,11 +21,12 @@ import { pageMeta } from "@/data/site";
   <Hero />
   <QuickInfoStrip />
   <EquipmentIndex />
+  <InteractiveGymMap />
 
   <section class="section">
     <div class="site-container home-section-grid">
       <div class="home-section-grid__intro">
-        <SectionIndex number="02" label="ČLANARINE" />
+        <SectionIndex number="03" label="ČLANARINE" />
         <h2 class="section-title">Redovne članarine</h2>
         <p class="section-lead">
           Izaberi mjesečnu, tromjesečnu, šestomjesečnu ili godišnju članarinu.
@@ -40,8 +41,6 @@ import { pageMeta } from "@/data/site";
       </div>
     </div>
   </section>
-
-  <SpaceAtmosphere />
 
   <section class="section">
     <div class="site-container home-section-grid">

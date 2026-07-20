@@ -1,0 +1,196 @@
+---
+import { gymFloorPlan, type GymLandmark, type GymMachine } from "@/data/gymFloorPlan";
+
+const { viewBox, wallPaths, landmarks, machines } = gymFloorPlan;
+
+const centerX = (item: GymLandmark | GymMachine) => item.x + item.width / 2;
+const centerY = (item: GymLandmark | GymMachine) => item.y + item.height / 2;
+
+const transformFor = (item: GymLandmark | GymMachine) =>
+  item.rotation
+    ? `rotate(${item.rotation} ${centerX(item)} ${centerY(item)})`
+    : undefined;
+
+const labelTransformFor = (item: GymLandmark | GymMachine) =>
+  item.labelRotation
+    ? `rotate(${item.labelRotation} ${centerX(item)} ${centerY(item)})`
+    : undefined;
+---
+
+<svg
+  class="gym-floor-plan"
+  viewBox={`0 0 ${viewBox.width} ${viewBox.height}`}
+  role="img"
+  aria-labelledby="gym-floor-plan-title gym-floor-plan-desc"
+  data-gym-map-svg
+>
+  <title id="gym-floor-plan-title">Plan prostora Techno Gym teretane</title>
+  <desc id="gym-floor-plan-desc">
+    Interaktivni plan prikazuje ulaz, pult, bučice, sprave M1 do M19 i četiri cardio trake.
+  </desc>
+
+  <rect class="gym-floor-plan__paper" x="0" y="0" width={viewBox.width} height={viewBox.height}></rect>
+
+  <g class="gym-floor-plan__walls" aria-hidden="true">
+    {wallPaths.map((wall) => <path d={wall.d} />)}
+  </g>
+
+  <g class="gym-floor-plan__landmarks" aria-hidden="true">
+    {landmarks.map((landmark) => (
+      <g transform={transformFor(landmark)}>
+        <rect
+          x={landmark.x}
+          y={landmark.y}
+          width={landmark.width}
+          height={landmark.height}
+        />
+        <text
+          x={centerX(landmark)}
+          y={centerY(landmark)}
+          transform={labelTransformFor(landmark)}
+          dominant-baseline="middle"
+          text-anchor="middle"
+        >
+          {landmark.label}
+        </text>
+      </g>
+    ))}
+  </g>
+
+  <g class="gym-floor-plan__machines">
+    {machines.map((item) => {
+      const padding = item.touchPadding ?? 8;
+      return (
+        <g
+          class="gym-floor-plan__machine"
+          role="button"
+          tabindex="0"
+          aria-label={`${item.id.toUpperCase()}, ${item.name}`}
+          aria-pressed="false"
+          aria-expanded="false"
+          aria-controls="gym-map-popover"
+          data-machine
+          data-machine-id={item.id}
+          data-machine-label={item.label}
+          data-machine-name={item.name}
+          data-machine-category={item.category}
+          data-machine-image={item.image}
+          data-machine-image-alt={item.imageAlt}
+          transform={transformFor(item)}
+        >
+          <rect
+            class="gym-floor-plan__touch-zone"
+            x={item.x - padding}
+            y={item.y - padding}
+            width={item.width + padding * 2}
+            height={item.height + padding * 2}
+          />
+          <rect
+            class="gym-floor-plan__machine-rect"
+            x={item.x}
+            y={item.y}
+            width={item.width}
+            height={item.height}
+          />
+          <text
+            x={centerX(item)}
+            y={centerY(item)}
+            transform={labelTransformFor(item)}
+            dominant-baseline="middle"
+            text-anchor="middle"
+          >
+            {item.label}
+          </text>
+        </g>
+      );
+    })}
+  </g>
+</svg>
+
+<style>
+  .gym-floor-plan {
+    display: block;
+    inline-size: 100%;
+    block-size: auto;
+    background: var(--color-paper-strong);
+  }
+
+  .gym-floor-plan__paper {
+    fill: var(--color-paper-strong);
+  }
+
+  .gym-floor-plan__walls path {
+    fill: none;
+    stroke: var(--color-ink);
+    stroke-width: 5;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+  }
+
+  .gym-floor-plan__walls path:last-child {
+    fill: var(--color-paper-strong);
+  }
+
+  .gym-floor-plan__landmarks rect {
+    fill: var(--color-paper-strong);
+    stroke: var(--color-ink);
+    stroke-width: 5;
+  }
+
+  .gym-floor-plan text {
+    fill: var(--color-ink);
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .gym-floor-plan__machine {
+    cursor: pointer;
+    outline: none;
+  }
+
+  .gym-floor-plan__touch-zone {
+    fill: transparent;
+    pointer-events: all;
+  }
+
+  .gym-floor-plan__machine-rect {
+    fill: #fbf7ec;
+    stroke: var(--color-ink);
+    stroke-width: 4;
+    transition:
+      fill var(--transition-fast),
+      stroke-width var(--transition-fast),
+      transform var(--transition-fast);
+  }
+
+  .gym-floor-plan__machine:hover .gym-floor-plan__machine-rect,
+  .gym-floor-plan__machine:focus-visible .gym-floor-plan__machine-rect,
+  .gym-floor-plan__machine[data-active="true"] .gym-floor-plan__machine-rect {
+    fill: var(--color-amber);
+    stroke-width: 7;
+  }
+
+  .gym-floor-plan__machine:focus-visible .gym-floor-plan__machine-rect {
+    stroke: var(--color-orange);
+  }
+
+  .gym-floor-plan__machine:focus-visible {
+    filter: drop-shadow(0 0 0 var(--color-amber));
+  }
+
+  @media (max-width: 30rem) {
+    .gym-floor-plan text {
+      font-size: 26px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gym-floor-plan__machine-rect {
+      transition: none;
+    }
+  }
+</style>

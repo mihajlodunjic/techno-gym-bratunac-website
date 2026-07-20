@@ -13,6 +13,7 @@ import "@/styles/layout.css";
 import "@/styles/utilities.css";
 import "@/styles/global.css";
 import currentDayScript from "@/scripts/current-day.ts?raw";
+import gymFloorPlanScript from "@/scripts/gym-floor-plan.ts?raw";
 import mobileNavigationScript from "@/scripts/mobile-navigation.ts?raw";
 
 interface Props {
@@ -67,6 +68,7 @@ const isIndexable =
       <Footer />
     </div>
     <script is:inline set:html={mobileNavigationScript}></script>
+    <script is:inline set:html={gymFloorPlanScript}></script>
     <script is:inline set:html={currentDayScript}></script>
   </body>
 </html>
