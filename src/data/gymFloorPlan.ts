@@ -42,7 +42,7 @@ const machine = (
   category: GymMachineCategory,
   rect: GymMapRect,
   labelRotation = 0,
-  touchPadding = 9
+  touchPadding = 8
 ): GymMachine => ({
   id,
   label,
@@ -57,223 +57,223 @@ const machine = (
 
 export const gymFloorPlan = {
   viewBox: {
-    width: 804,
-    height: 695
+    width: 1448,
+    height: 1086
   },
   wallPaths: [
     {
-      id: "upper-left-and-top",
-      d: "M190 29 L190 146 L261 146 L261 32 L579 32 L579 248"
+      id: "upper-main-room",
+      d: "M360 47 H1038 V389"
     },
     {
-      id: "left-wall-and-bottom",
-      d: "M190 146 L190 188 L78 188 L78 649 L575 649"
+      id: "upper-left-indentation",
+      d: "M360 221 V289 H164 V354"
+    },
+    {
+      id: "left-and-lower-main-room",
+      d: "M164 505 V1018 H1030"
     },
     {
       id: "right-cardio-room",
-      d: "M579 186 L777 186 L777 651 L575 649 L575 510"
+      d: "M1038 291 H1388 V1018 H1030 V801"
     },
     {
       id: "middle-right-opening-post",
-      d: "M575 303 L575 393"
-    },
-    {
-      id: "entry-marker",
-      d: "M43 229 L79 229 L79 324 L43 324 Z"
+      d: "M1029 470 V619"
     }
   ] satisfies GymWallPath[],
   landmarks: [
     {
       id: "pult",
       label: "PULT",
-      x: 191,
-      y: 32,
-      width: 70,
-      height: 114,
+      x: 360,
+      y: 48,
+      width: 122,
+      height: 173,
       rotation: 0,
       labelRotation: 90
     },
     {
       id: "ulaz",
       label: "ULAZ",
-      x: 43,
-      y: 229,
-      width: 36,
-      height: 95,
+      x: 95,
+      y: 354,
+      width: 70,
+      height: 151,
       rotation: 0,
       labelRotation: 90
     },
     {
       id: "bucice",
       label: "BUČICE",
-      x: 206,
-      y: 604,
-      width: 274,
-      height: 30,
+      x: 380,
+      y: 946,
+      width: 480,
+      height: 53,
       rotation: 0
     }
   ] satisfies GymLandmark[],
   machines: [
     machine("m1", "M1", "Technogym Selection Lat Pulldown", "SELECTION", {
-      x: 271,
-      y: 46,
-      width: 73,
-      height: 38,
+      x: 498,
+      y: 61,
+      width: 132,
+      height: 68,
       rotation: 0
     }),
     machine("m2", "M2", "Technogym Selection Kickback", "SELECTION", {
-      x: 363,
-      y: 43,
-      width: 69,
-      height: 43,
+      x: 654,
+      y: 61,
+      width: 132,
+      height: 68,
       rotation: 0
     }),
     machine("m3", "M3", "Technogym Selection Lateral Raise", "SELECTION", {
-      x: 464,
-      y: 43,
-      width: 61,
-      height: 43,
+      x: 822,
+      y: 61,
+      width: 132,
+      height: 68,
       rotation: 0
     }),
     machine("m4", "M4", "Cable Row / Lat Pulldown", "STRENGTH", {
-      x: 513,
-      y: 95,
-      width: 44,
-      height: 51,
+      x: 917,
+      y: 145,
+      width: 89,
+      height: 69,
       rotation: 0
-    }, 90, 12),
+    }, 0, 5),
     machine("m5", "M5", "Technogym Selection Leg Extension", "SELECTION", {
-      x: 508,
-      y: 160,
-      width: 49,
-      height: 50,
+      x: 917,
+      y: 227,
+      width: 89,
+      height: 68,
       rotation: 0
-    }, 90, 12),
+    }, 0, 5),
     machine("m6", "M6", "Technogym Selection Incline Chest Press", "SELECTION", {
-      x: 509,
-      y: 213,
-      width: 49,
-      height: 45,
+      x: 919,
+      y: 310,
+      width: 89,
+      height: 69,
       rotation: 0
-    }, 90, 12),
+    }, 0, 5),
     machine("m7", "M7", "Power Tower", "STRENGTH", {
-      x: 514,
-      y: 313,
-      width: 51,
-      height: 72,
+      x: 921,
+      y: 489,
+      width: 88,
+      height: 114,
       rotation: 0
-    }, 90, 12),
+    }, 0, 6),
     machine("m8", "M8", "Smith Machine", "STRENGTH", {
-      x: 513,
-      y: 547,
-      width: 51,
-      height: 74,
+      x: 921,
+      y: 857,
+      width: 88,
+      height: 119,
       rotation: 0
-    }, 90, 12),
+    }, 0, 6),
     machine("m9", "M9", "Incline Bench Press", "STRENGTH", {
-      x: 92,
-      y: 541,
-      width: 65,
-      height: 52,
+      x: 189,
+      y: 839,
+      width: 123,
+      height: 87,
       rotation: 0
-    }, 0, 12),
+    }),
     machine("m10", "M10", "Flat Bench Press", "STRENGTH", {
-      x: 94,
-      y: 446,
-      width: 70,
-      height: 53,
+      x: 189,
+      y: 694,
+      width: 123,
+      height: 87,
       rotation: 0
-    }, 0, 12),
+    }),
     machine("m11", "M11", "Squat Rack", "STRENGTH", {
-      x: 237,
-      y: 349,
-      width: 82,
-      height: 64,
+      x: 442,
+      y: 538,
+      width: 145,
+      height: 112,
       rotation: 0
     }),
     machine("m12", "M12", "Technogym Selection Leg Curl", "SELECTION", {
-      x: 248,
-      y: 216,
-      width: 82,
-      height: 47,
+      x: 458,
+      y: 330,
+      width: 142,
+      height: 71,
       rotation: 0
-    }, 0, 12),
+    }, 0, 5),
     machine("m13", "M13", "Technogym Selection Cable Jungle", "SELECTION", {
-      x: 331,
-      y: 170,
-      width: 86,
-      height: 59,
+      x: 618,
+      y: 270,
+      width: 139,
+      height: 78,
       rotation: 0
     }),
     machine("m14", "M14", "Technogym Selection Hip Abduction", "SELECTION", {
-      x: 591,
-      y: 525,
-      width: 73,
-      height: 53,
+      x: 1054,
+      y: 817,
+      width: 136,
+      height: 88,
       rotation: 0
-    }, 0, 12),
+    }, 0, 7),
     machine("m15", "M15", "Technogym Selection Hip Adduction", "SELECTION", {
-      x: 592,
-      y: 597,
-      width: 79,
-      height: 47,
+      x: 1054,
+      y: 928,
+      width: 136,
+      height: 75,
       rotation: 0
-    }, 0, 12),
+    }, 0, 7),
     machine("m16", "M16", "Technogym Selection Ab Crunch", "SELECTION", {
-      x: 594,
-      y: 198,
-      width: 72,
-      height: 48,
+      x: 1063,
+      y: 311,
+      width: 136,
+      height: 70,
       rotation: 0
     }),
     machine("m17", "M17", "Back Extension Bench", "STRENGTH", {
-      x: 683,
-      y: 198,
-      width: 70,
-      height: 47,
+      x: 1220,
+      y: 311,
+      width: 136,
+      height: 70,
       rotation: 0
     }),
     machine("m18", "M18", "Technogym Selection Chest Press", "SELECTION", {
-      x: 250,
-      y: 263,
-      width: 76,
-      height: 45,
+      x: 458,
+      y: 410,
+      width: 142,
+      height: 70,
       rotation: 0
-    }, 0, 12),
+    }, 0, 5),
     machine("m19", "M19", "Technogym Selection Cable Crossover", "SELECTION", {
-      x: 351,
-      y: 302,
-      width: 129,
-      height: 34,
+      x: 638,
+      y: 460,
+      width: 206,
+      height: 63,
       rotation: 0
-    }, 0, 12),
+    }),
     machine("c1", "C", "Technogym traka za trčanje", "CARDIO", {
-      x: 671,
-      y: 283,
-      width: 94,
-      height: 48,
+      x: 1200,
+      y: 432,
+      width: 165,
+      height: 80,
       rotation: 0
-    }, 0, 10),
+    }, 0, 5),
     machine("c2", "C", "Technogym traka za trčanje", "CARDIO", {
-      x: 671,
-      y: 345,
-      width: 94,
-      height: 47,
+      x: 1200,
+      y: 530,
+      width: 165,
+      height: 80,
       rotation: 0
-    }, 0, 10),
+    }, 0, 5),
     machine("c3", "C", "Technogym traka za trčanje", "CARDIO", {
-      x: 671,
-      y: 408,
-      width: 94,
-      height: 47,
+      x: 1200,
+      y: 629,
+      width: 165,
+      height: 80,
       rotation: 0
-    }, 0, 10),
+    }, 0, 5),
     machine("c4", "C", "Technogym traka za trčanje", "CARDIO", {
-      x: 671,
-      y: 471,
-      width: 94,
-      height: 47,
+      x: 1200,
+      y: 729,
+      width: 165,
+      height: 80,
       rotation: 0
-    }, 0, 10)
+    }, 0, 5)
   ] satisfies GymMachine[]
 };

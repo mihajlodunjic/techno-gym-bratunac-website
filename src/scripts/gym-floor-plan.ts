@@ -178,9 +178,11 @@ const initializeGymFloorPlan = () => {
 
       if (shouldRestoreFocus && focusTarget) {
         isRestoringFocus = true;
-        focusWithoutScroll(focusTarget);
         window.setTimeout(() => {
-          isRestoringFocus = false;
+          focusWithoutScroll(focusTarget);
+          window.setTimeout(() => {
+            isRestoringFocus = false;
+          }, 0);
         }, 0);
       }
     };
@@ -290,6 +292,8 @@ const initializeGymFloorPlan = () => {
 
       machine.addEventListener("click", (event) => {
         if (isCompact()) {
+          event.preventDefault();
+          event.stopPropagation();
           return;
         }
 
@@ -349,9 +353,37 @@ const initializeGymFloorPlan = () => {
       closeButton.addEventListener("click", () => closePopover());
     }
 
-    backdrop.addEventListener("click", () => closePopover());
+    backdrop.addEventListener("pointerdown", () => closePopover());
+
+    const closeCompactPopoverFromOutside = (event) => {
+      if (!locked || !activeMachine) {
+        return false;
+      }
+
+      const target = event.target;
+      const targetElement =
+        target instanceof Element ? target : target instanceof Node ? target.parentElement : null;
+
+      if (!isCompact()) {
+        return false;
+      }
+
+      if (
+        target instanceof Node &&
+        (popover.contains(target) || targetElement?.closest("[data-machine]"))
+      ) {
+        return false;
+      }
+
+      closePopover();
+      return true;
+    };
 
     document.addEventListener("pointerdown", (event) => {
+      if (closeCompactPopoverFromOutside(event)) {
+        return;
+      }
+
       if (!locked || !activeMachine || isCompact()) {
         return;
       }
@@ -365,6 +397,14 @@ const initializeGymFloorPlan = () => {
       ) {
         closePopover({ restoreFocus: false });
       }
+    });
+
+    document.addEventListener("click", (event) => {
+      closeCompactPopoverFromOutside(event);
+    });
+
+    document.addEventListener("touchstart", (event) => {
+      closeCompactPopoverFromOutside(event);
     });
 
     const handleEscape = (event) => {

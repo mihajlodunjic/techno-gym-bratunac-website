@@ -29,7 +29,33 @@ const labelTransformFor = (item: GymLandmark | GymMachine) =>
     Interaktivni plan prikazuje ulaz, pult, bučice, sprave M1 do M19 i četiri cardio trake.
   </desc>
 
+  <defs>
+    <linearGradient id="gym-map-gradient" x1="0" y1="0" x2="1" y2="0.88">
+      <stop offset="0%" stop-color="#FFD65A" />
+      <stop offset="48%" stop-color="#F8B746" />
+      <stop offset="100%" stop-color="#EF9145" />
+    </linearGradient>
+    <pattern
+      id="gym-map-construction-pattern"
+      width="176"
+      height="176"
+      patternUnits="userSpaceOnUse"
+    >
+      <path d="M0 0H176V176H0Z" fill="none" stroke="currentColor" stroke-width="1" opacity="0.11" />
+      <path d="M88 0V176M0 88H176" stroke="currentColor" stroke-width="1" opacity="0.06" />
+    </pattern>
+  </defs>
+
   <rect class="gym-floor-plan__paper" x="0" y="0" width={viewBox.width} height={viewBox.height}></rect>
+  <rect class="gym-floor-plan__texture" x="0" y="0" width={viewBox.width} height={viewBox.height}></rect>
+
+  <g class="gym-floor-plan__construction" aria-hidden="true">
+    <rect x="68" y="764" width="210" height="170" />
+    <rect x="100" y="912" width="185" height="124" />
+    <rect x="157" y="19" width="136" height="216" />
+    <rect x="1142" y="182" width="168" height="154" />
+    <rect x="1250" y="952" width="130" height="96" />
+  </g>
 
   <g class="gym-floor-plan__walls" aria-hidden="true">
     {wallPaths.map((wall) => <path d={wall.d} />)}
@@ -37,7 +63,7 @@ const labelTransformFor = (item: GymLandmark | GymMachine) =>
 
   <g class="gym-floor-plan__landmarks" aria-hidden="true">
     {landmarks.map((landmark) => (
-      <g transform={transformFor(landmark)}>
+      <g data-landmark-id={landmark.id} transform={transformFor(landmark)}>
         <rect
           x={landmark.x}
           y={landmark.y}
@@ -45,6 +71,7 @@ const labelTransformFor = (item: GymLandmark | GymMachine) =>
           height={landmark.height}
         />
         <text
+          class="gym-floor-plan__landmark-label"
           x={centerX(landmark)}
           y={centerY(landmark)}
           transform={labelTransformFor(landmark)}
@@ -93,6 +120,7 @@ const labelTransformFor = (item: GymLandmark | GymMachine) =>
             height={item.height}
           />
           <text
+            class="gym-floor-plan__machine-label"
             x={centerX(item)}
             y={centerY(item)}
             transform={labelTransformFor(item)}
@@ -112,27 +140,35 @@ const labelTransformFor = (item: GymLandmark | GymMachine) =>
     display: block;
     inline-size: 100%;
     block-size: auto;
-    background: var(--color-paper-strong);
+    background: var(--color-amber);
   }
 
   .gym-floor-plan__paper {
-    fill: var(--color-paper-strong);
+    fill: url("#gym-map-gradient");
+  }
+
+  .gym-floor-plan__texture {
+    color: rgba(23, 23, 20, 0.42);
+    fill: url("#gym-map-construction-pattern");
+    opacity: 0.62;
+  }
+
+  .gym-floor-plan__construction rect {
+    fill: none;
+    stroke: rgba(255, 253, 247, 0.22);
+    stroke-width: 1;
   }
 
   .gym-floor-plan__walls path {
     fill: none;
     stroke: var(--color-ink);
-    stroke-width: 5;
+    stroke-width: 7;
     stroke-linecap: square;
     stroke-linejoin: miter;
   }
 
-  .gym-floor-plan__walls path:last-child {
-    fill: var(--color-paper-strong);
-  }
-
   .gym-floor-plan__landmarks rect {
-    fill: var(--color-paper-strong);
+    fill: rgba(255, 253, 247, 0.48);
     stroke: var(--color-ink);
     stroke-width: 5;
   }
@@ -140,11 +176,22 @@ const labelTransformFor = (item: GymLandmark | GymMachine) =>
   .gym-floor-plan text {
     fill: var(--color-ink);
     font-family: var(--font-display);
-    font-size: 24px;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: -0.02em;
     pointer-events: none;
     user-select: none;
+  }
+
+  .gym-floor-plan__machine-label {
+    font-size: 42px;
+  }
+
+  .gym-floor-plan__landmark-label {
+    font-size: 38px;
+  }
+
+  .gym-floor-plan [data-landmark-id="bucice"] .gym-floor-plan__landmark-label {
+    font-size: 32px;
   }
 
   .gym-floor-plan__machine {
@@ -158,11 +205,12 @@ const labelTransformFor = (item: GymLandmark | GymMachine) =>
   }
 
   .gym-floor-plan__machine-rect {
-    fill: #fbf7ec;
+    fill: rgba(255, 253, 247, 0.58);
     stroke: var(--color-ink);
     stroke-width: 4;
     transition:
       fill var(--transition-fast),
+      stroke var(--transition-fast),
       stroke-width var(--transition-fast),
       transform var(--transition-fast);
   }
@@ -170,21 +218,28 @@ const labelTransformFor = (item: GymLandmark | GymMachine) =>
   .gym-floor-plan__machine:hover .gym-floor-plan__machine-rect,
   .gym-floor-plan__machine:focus-visible .gym-floor-plan__machine-rect,
   .gym-floor-plan__machine[data-active="true"] .gym-floor-plan__machine-rect {
-    fill: var(--color-amber);
-    stroke-width: 7;
+    fill: var(--color-ink);
+    stroke: var(--color-paper-strong);
+    stroke-width: 8;
+  }
+
+  .gym-floor-plan__machine:hover .gym-floor-plan__machine-label,
+  .gym-floor-plan__machine:focus-visible .gym-floor-plan__machine-label,
+  .gym-floor-plan__machine[data-active="true"] .gym-floor-plan__machine-label {
+    fill: var(--color-paper-strong);
   }
 
   .gym-floor-plan__machine:focus-visible .gym-floor-plan__machine-rect {
-    stroke: var(--color-orange);
+    stroke: var(--color-amber-light);
   }
 
   .gym-floor-plan__machine:focus-visible {
-    filter: drop-shadow(0 0 0 var(--color-amber));
+    filter: none;
   }
 
   @media (max-width: 30rem) {
-    .gym-floor-plan text {
-      font-size: 26px;
+    .gym-floor-plan__texture {
+      opacity: 0.38;
     }
   }
 
